@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Victor's Gym">
+<title>Victor's Gym Tracker</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { font-family: Georgia, serif; background: #0F0F0F; color: #E8E8E8; min-height: 100vh; }
+  #app { max-width: 480px; margin: 0 auto; padding: 16px 16px 60px; }
+
+  /* HEADER */
+  .header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #2A2A2A; }
+  .logo { width: 44px; height: 44px; border-radius: 50%; background: #1B4332; color: #52B788; font-weight: 900; font-size: 22px; display: flex; align-items: center; justify-content: center; }
+  .header-title { font-weight: 700; font-size: 18px; letter-spacing: 3px; color: #FFF; }
+  .header-sub { font-size: 12px; color: #666; letter-spacing: 1px; }
+
+  /* COMMON */
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #555; margin-bottom: 10px; margin-top: 8px; }
+  .last-badge { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #AAA; margin-bottom: 20px; }
+  .back-btn { background: none; border: none; color: #888; font-size: 14px; cursor: pointer; margin-bottom: 16px; padding: 0; font-family: Georgia, serif; }
+
+  /* SESSION CARDS */
+  .session-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+  .session-card { border: none; border-radius: 12px; padding: 14px 10px; cursor: pointer; text-align: center; display: flex; flex-direction: column; gap: 4px; }
+  .session-card-letter { font-size: 32px; font-weight: 900; line-height: 1; }
+  .session-card-label { font-size: 11px; font-weight: 700; color: #FFF; letter-spacing: 1px; }
+  .session-card-sub { font-size: 10px; color: #AAA; line-height: 1.3; }
+  .session-card-count { font-size: 11px; font-weight: 600; margin-top: 4px; }
+
+  /* HISTORY LIST */
+  .history-list { display: flex; flex-direction: column; gap: 8px; }
+  .history-row { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 12px 14px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; }
+  .history-badge { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; color: #FFF; flex-shrink: 0; }
+  .history-label { font-size: 14px; font-weight: 600; color: #EEE; }
+  .history-sub { font-size: 12px; color: #666; margin-top: 2px; }
+  .history-energy { font-size: 22px; }
+
+  /* PROGRESS */
+  .progress-bar { height: 4px; background: #222; border-radius: 2px; margin-bottom: 16px; }
+  .progress-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+
+  /* SESSION SCREEN */
+  .session-header { padding-left: 12px; margin-bottom: 16px; }
+  .session-label-tag { font-weight: 700; font-size: 13px; letter-spacing: 2px; }
+  .step-count { font-size: 12px; color: #666; margin-top: 2px; }
+  .ex-name { font-size: 24px; font-weight: 700; color: #FFF; margin-bottom: 6px; line-height: 1.2; }
+  .ex-hint { font-size: 13px; color: #888; margin-bottom: 14px; font-style: italic; }
+
+  /* LAST CARD */
+  .last-card { background: #151515; border: 1px solid #2A2A2A; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; }
+  .last-title { font-size: 11px; color: #555; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
+  .last-row { font-size: 13px; color: #999; margin-bottom: 2px; }
+
+  /* SET CARDS */
+  .set-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 12px; padding: 14px; margin-bottom: 10px; }
+  .set-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; margin-bottom: 12px; }
+  .set-row { display: flex; gap: 12px; }
+  .input-group { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .input-label { font-size: 11px; color: #666; font-weight: 600; letter-spacing: 1px; }
+  .num-input { background: #0F0F0F; border: 1px solid #333; border-radius: 8px; padding: 10px 12px; color: #FFF; font-size: 22px; font-weight: 700; width: 100%; font-family: Georgia, serif; }
+
+  /* STEPPER */
+  .stepper-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .stepper-label { font-size: 11px; color: #666; font-weight: 600; letter-spacing: 1px; text-align: center; }
+  .stepper-row { display: flex; align-items: center; gap: 10px; }
+  .step-btn { width: 40px; height: 40px; border-radius: 8px; background: #0F0F0F; border: 1px solid #333; color: #CCC; font-size: 22px; cursor: pointer; font-family: Georgia, serif; line-height: 1; }
+  .stepper-val { font-size: 18px; font-weight: 700; color: #FFF; min-width: 70px; text-align: center; }
+  .stepper-unit { font-size: 11px; color: #666; font-weight: 400; }
+  .summary-line { font-size: 14px; color: #888; margin-bottom: 12px; font-style: italic; }
+  .complete-btn { width: 100%; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: Georgia, serif; border: 1px solid #333; background: #1A1A1A; color: #AAA; transition: all 0.2s; }
+  .complete-btn.done { color: #fff; }
+
+  /* FAILURE ROW */
+  .failure-row { display: flex; align-items: center; justify-content: space-between; background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+  .failure-label { font-size: 13px; color: #AAA; }
+  .failure-btns { display: flex; gap: 8px; }
+  .failure-btn { background: #111; border: 1px solid #333; border-radius: 8px; padding: 6px 12px; color: #AAA; font-size: 13px; cursor: pointer; font-family: Georgia, serif; }
+  .failure-btn.active { color: #fff; }
+
+  /* NOTES */
+  .notes-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .notes-input { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 8px; padding: 10px 12px; color: #CCC; font-size: 14px; resize: vertical; min-height: 60px; font-family: Georgia, serif; width: 100%; }
+
+  /* NAV */
+  .nav-row { display: flex; gap: 10px; margin-top: 4px; }
+  .next-btn { flex: 1; border: none; border-radius: 10px; padding: 14px; color: #FFF; font-weight: 700; font-size: 15px; cursor: pointer; font-family: Georgia, serif; }
+  .prev-btn { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 14px 18px; color: #AAA; font-weight: 600; font-size: 14px; cursor: pointer; font-family: Georgia, serif; }
+
+  /* REVIEW */
+  .review-header { border-radius: 12px; padding: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
+  .review-letter { font-size: 40px; font-weight: 900; line-height: 1; }
+  .review-title { font-size: 16px; font-weight: 700; color: #FFF; }
+  .review-date { font-size: 12px; color: #AAA; margin-top: 2px; }
+  .energy-section { margin-bottom: 20px; }
+  .energy-btns { display: flex; gap: 6px; }
+  .energy-btn { flex: 1; background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 10px 4px; cursor: pointer; color: #AAA; font-family: Georgia, serif; text-align: center; }
+  .energy-btn.active { color: #fff; }
+  .energy-emoji { font-size: 22px; }
+  .energy-word { font-size: 10px; margin-top: 2px; }
+  .review-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
+  .review-ex-name { font-size: 14px; font-weight: 700; color: #EEE; margin-bottom: 8px; }
+  .review-set-row { display: flex; gap: 12px; font-size: 13px; color: #AAA; margin-bottom: 4px; align-items: center; }
+  .review-set-label { color: #666; min-width: 100px; }
+  .review-set-val { min-width: 70px; }
+  .review-meta { font-size: 12px; color: #666; margin-top: 6px; }
+  .review-note { font-size: 12px; color: #888; margin-top: 4px; font-style: italic; }
+  .save-btn { width: 100%; border: none; border-radius: 10px; padding: 16px; color: #FFF; font-weight: 700; font-size: 16px; cursor: pointer; font-family: Georgia, serif; margin-top: 16px; }
+  .edit-btn { width: 100%; background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 14px; color: #AAA; font-weight: 600; font-size: 14px; cursor: pointer; font-family: Georgia, serif; margin-top: 8px; }
+  .energy-display { background: #1A1A1A; border-radius: 10px; padding: 10px 14px; font-size: 14px; color: #AAA; margin-bottom: 14px; }
+  .done-green { color: #52B788; font-size: 13px; }
+  .stepper-flex { display: flex; gap: 16px; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// ─── VERSION ───────────────────────────────────────────────────
+const VERSION = "1.2 — April 2026";
+
+// ─── SESSION DATA ──────────────────────────────────────────────
+const SESSIONS = {
+  A: {
+    label: "SESSION A", subtitle: "Chest · Back · Biceps · Legs",
+    color: "#1B4332", accent: "#52B788",
+    exercises: [
+      { id: "chest_press",  name: "Chest Press",              sets: 2, notes: "Set 1 moderate · Set 2 ramp to ~failure at 8 reps" },
+      { id: "lat_pulldown", name: "Lat Pulldown",             sets: 2, notes: "Ramp protocol" },
+      { id: "seated_row_a", name: "Seated Row",               sets: 2, notes: "Ramp protocol" },
+      { id: "ez_curl",      name: "Cable / EZ Bar Curl",      sets: 2, notes: "Ramp protocol" },
+      { id: "leg_press_a",  name: "Leg Press",                sets: 2, notes: "Ramp protocol" },
+      { id: "leg_curl_a",   name: "Leg Curl (Hamstring)",     sets: 2, notes: "Ramp protocol — quad/hamstring balance" },
+      { id: "face_pull",    name: "Cable Face Pull",          sets: 2, notes: "Light weight, full range — rear delt & rotator cuff" },
+      { id: "plank_a",      name: "Plank",   type: "plank",  defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
+      { id: "carry_a",      name: "Farmer Carry", type: "carry", defaultWeight: 30, defaultDistance: 120, notes: "Closing anchor — adjust weight as you progress" },
+    ]
+  },
+  B: {
+    label: "SESSION B", subtitle: "Shoulders · Triceps · Lower Body",
+    color: "#1C3461", accent: "#5B8DEF",
+    exercises: [
+      { id: "shoulder_press", name: "Shoulder Press",               sets: 2, notes: "Ramp protocol" },
+      { id: "lateral_raise",  name: "Lateral Raise Machine",        sets: 2, notes: "Light — shoulder stabilizer health" },
+      { id: "tricep_pushdown",name: "Triceps Pushdown",             sets: 2, notes: "Ramp protocol" },
+      { id: "assisted_chin",  name: "Assisted Chin / Pulldown",     sets: 2, notes: "Ramp protocol" },
+      { id: "hip_abduction",  name: "Hip Abduction",                sets: 2, notes: "Glute med — fall prevention" },
+      { id: "hip_adduction",  name: "Hip Adduction",                sets: 2, notes: "Inner thigh balance" },
+      { id: "glute_press",    name: "Glute Press / Cable Kickback", sets: 2, notes: "Hip hinge pattern — largest muscle group" },
+      { id: "calf_raise",     name: "Seated Calf Raise",            sets: 2, notes: "Balance, ankle stability, circulation" },
+      { id: "plank_b",        name: "Plank",   type: "plank",  defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
+      { id: "carry_b",        name: "Farmer Carry", type: "carry", defaultWeight: 30, defaultDistance: 120, notes: "Closing anchor — adjust weight as you progress" },
+    ]
+  },
+  C: {
+    label: "SESSION C", subtitle: "Full Body Power Day",
+    color: "#4A1942", accent: "#C77DFF",
+    exercises: [
+      { id: "leg_press_c",    name: "Leg Press",                         sets: 2, notes: "Go heavier — this is your power day" },
+      { id: "chest_press_c",  name: "Chest Press",                       sets: 2, notes: "Ramp protocol" },
+      { id: "seated_row_c",   name: "Seated Row",                        sets: 2, notes: "Ramp protocol" },
+      { id: "shoulder_press_c",name: "Shoulder Press",                   sets: 2, notes: "Ramp protocol" },
+      { id: "leg_curl_c",     name: "Leg Curl (Hamstring)",              sets: 2, notes: "Hamstring balance — do not skip" },
+      { id: "cable_curl_c",   name: "Cable / EZ Bar Curl",               sets: 2, notes: "Ramp protocol" },
+      { id: "rotary_torso",   name: "Rotary Torso / Cable Woodchop",     sets: 2, notes: "Both sides — controlled tempo" },
+      { id: "plank_c",        name: "Plank",   type: "plank",  defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
+      { id: "carry_c",        name: "Farmer Carry", type: "carry", defaultWeight: 35, defaultDistance: 120, notes: "Power day — stepped up carry weight" },
+    ]
+  }
+};
+
+const ENERGY = [
+  { v: 1, label: "Low",      e: "😓" },
+  { v: 2, label: "Moderate", e: "😐" },
+  { v: 3, label: "Good",     e: "💪" },
+  { v: 4, label: "Strong",   e: "🔥" },
+  { v: 5, label: "Best ever",e: "⚡" },
+];
+
+// ─── STATE ─────────────────────────────────────────────────────
+let state = {
+  screen: "home",       // home | session | review | history
+  sessionKey: null,
+  step: 0,
+  sessionData: {},
+  energy: null,
+  sessionDate: null,
+  viewingRecord: null,
+  history: [],
+};
+
+function loadHistory() {
+  try { state.history = JSON.parse(localStorage.getItem("victor_gym_history") || "[]"); } catch { state.history = []; }
+}
+
+function saveHistory() {
+  localStorage.setItem("victor_gym_history", JSON.stringify(state.history));
+}
+
+function getSession() { return SESSIONS[state.sessionKey]; }
+function getExercise() { return getSession()?.exercises[state.step]; }
+
+function getExData(id) {
+  const ex = getExercise();
+  if (!ex) return {};
+  id = id || ex.id;
+  if (!state.sessionData[id]) {
+    const last = getLastData(state.sessionKey, id);
+    if (ex.type === "plank")
+      state.sessionData[id] = { plankSets: last?.plankSets ?? ex.defaultSets, plankDuration: last?.plankDuration ?? ex.defaultDuration, notes: "", completed: false };
+    else if (ex.type === "carry")
+      state.sessionData[id] = { carryWeight: last?.carryWeight ?? ex.defaultWeight, carryDistance: last?.carryDistance ?? ex.defaultDistance, notes: "", completed: false };
+    else
+      state.sessionData[id] = { sets: [{weight:"",reps:""},{weight:"",reps:""}], notes: "", hitFailure: null };
+  }
+  return state.sessionData[id];
+}
+
+function getLastData(sessionKey, exerciseId) {
+  const past = [...state.history].reverse().find(r => r.sessionKey === sessionKey);
+  return past?.exercises?.[exerciseId] || null;
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleDateString("en-CA", { weekday: "short", year: "numeric", month: "short", day: "numeric" });
+}
+
+// ─── RENDER ────────────────────────────────────────────────────
+function render() {
+  const app = document.getElementById("app");
+  app.innerHTML = "";
+  if (state.screen === "home")    app.appendChild(renderHome());
+  if (state.screen === "session") app.appendChild(renderSession());
+  if (state.screen === "review")  app.appendChild(renderReview());
+  if (state.screen === "history") app.appendChild(renderHistoryDetail());
+}
+
+// ── HOME ──────────────────────────────────────────────────────
+function renderHome() {
+  const d = div();
+  // Header
+  const hdr = div("header");
+  hdr.innerHTML = `<div class="logo">V</div><div><div class="header-title">VICTOR'S GYM</div><div class="header-sub">Guided Session Tracker · ${VERSION}</div></div>`;
+  d.appendChild(hdr);
+
+  // Last session badge
+  if (state.history.length > 0) {
+    const last = state.history[state.history.length - 1];
+    const en = ENERGY.find(e => e.v === last.energy);
+    const b = div("last-badge");
+    b.innerHTML = `Last: <strong>${last.sessionLabel}</strong> — ${fmtDate(last.date)} ${en ? en.e : ""}`;
+    d.appendChild(b);
+  }
+
+  // Session cards
+  label(d, "START A SESSION");
+  const grid = div("session-grid");
+  Object.entries(SESSIONS).forEach(([key, s]) => {
+    const card = btn("session-card", () => startSession(key));
+    card.style.background = s.color;
+    card.innerHTML = `
+      <div class="session-card-letter" style="color:${s.accent}">${key}</div>
+      <div class="session-card-label">${s.label}</div>
+      <div class="session-card-sub">${s.subtitle}</div>
+      <div class="session-card-count" style="color:${s.accent}">${s.exercises.length} exercises</div>`;
+    grid.appendChild(card);
+  });
+  d.appendChild(grid);
+
+  // History
+  if (state.history.length > 0) {
+    label(d, "RECENT SESSIONS");
+    const list = div("history-list");
+    [...state.history].reverse().slice(0, 12).forEach(r => {
+      const s = SESSIONS[r.sessionKey];
+      const en = ENERGY.find(e => e.v === r.energy);
+      const row = btn("history-row", () => { state.viewingRecord = r; state.screen = "history"; render(); });
+      row.innerHTML = `
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="history-badge" style="background:${s?.color}">${r.sessionKey}</div>
+          <div><div class="history-label">${r.sessionLabel}</div><div class="history-sub">${fmtDate(r.date)}</div></div>
+        </div>
+        <div class="history-energy">${en ? en.e : "—"}</div>`;
+      list.appendChild(row);
+    });
+    d.appendChild(list);
+  }
+  return d;
+}
+
+// ── SESSION ───────────────────────────────────────────────────
+function renderSession() {
+  const s = getSession();
+  const ex = getExercise();
+  const exd = getExData();
+  const total = s.exercises.length;
+  const progress = (state.step / total) * 100;
+  const isLast = state.step === total - 1;
+  const isPlank = ex.type === "plank";
+  const isCarry = ex.type === "carry";
+  const last = getLastData(state.sessionKey, ex.id);
+
+  const d = div();
+
+  // Progress
+  const pb = div("progress-bar");
+  const pf = div("progress-fill");
+  pf.style.width = progress + "%";
+  pf.style.background = s.accent;
+  pb.appendChild(pf);
+  d.appendChild(pb);
+
+  // Session tag
+  const sh = div("session-header");
+  sh.style.borderLeft = `4px solid ${s.accent}`;
+  sh.innerHTML = `<div class="session-label-tag" style="color:${s.accent}">${s.label}</div><div class="step-count">Exercise ${state.step + 1} of ${total}</div>`;
+  d.appendChild(sh);
+
+  // Exercise name & hint
+  el(d, "div", "ex-name", ex.name);
+  el(d, "div", "ex-hint", ex.notes);
+
+  // Last session
+  if (last) {
+    const lc = div("last-card");
+    el(lc, "div", "last-title", "LAST TIME");
+    if (isPlank) el(lc, "div", "last-row", `${last.plankSets} sets · ${last.plankDuration} sec each`);
+    else if (isCarry) el(lc, "div", "last-row", `${last.carryWeight} lbs each hand · ${last.carryDistance} m`);
+    else (last.sets || []).forEach((st2, i) => el(lc, "div", "last-row", `Set ${i+1}: ${st2.weight||"—"} lbs · ${st2.reps||"—"} reps`));
+    if (!isPlank && !isCarry && last.hitFailure !== null && last.hitFailure !== undefined)
+      el(lc, "div", "last-row", `Failure: ${last.hitFailure ? "Yes ✅" : "No ❌"}`);
+    d.appendChild(lc);
+  }
+
+  // PLANK
+  if (isPlank) {
+    const sc = div("set-card");
+    el(sc, "div", "set-label", "ADJUST & COMPLETE").style.color = s.accent;
+    const sf = div("stepper-flex");
+    sf.appendChild(stepper("Sets", exd.plankSets, 1, 5, 1, "sets", v => { exd.plankSets = v; render(); }));
+    sf.appendChild(stepper("Duration", exd.plankDuration, 15, 180, 15, "sec", v => { exd.plankDuration = v; render(); }));
+    sc.appendChild(sf);
+    const total_sec = exd.plankSets * exd.plankDuration;
+    el(sc, "div", "summary-line", `${exd.plankSets} × ${exd.plankDuration} sec = ${Math.round(total_sec/60*10)/10} min total`);
+    const cb = btn("complete-btn" + (exd.completed ? " done" : ""), () => { exd.completed = !exd.completed; render(); });
+    if (exd.completed) cb.style.background = s.accent;
+    cb.style.borderColor = exd.completed ? s.accent : "#333";
+    cb.textContent = exd.completed ? "✓ Completed" : "Mark Complete";
+    sc.appendChild(cb);
+    d.appendChild(sc);
+  }
+
+  // CARRY
+  if (isCarry) {
+    const sc = div("set-card");
+    el(sc, "div", "set-label", "ADJUST & COMPLETE").style.color = s.accent;
+    const sf = div("stepper-flex");
+    sf.appendChild(stepper("Weight / hand", exd.carryWeight, 10, 80, 5, "lbs", v => { exd.carryWeight = v; render(); }));
+    sf.appendChild(stepper("Distance", exd.carryDistance, 40, 400, 20, "m", v => { exd.carryDistance = v; render(); }));
+    sc.appendChild(sf);
+    el(sc, "div", "summary-line", `${exd.carryWeight} lbs each hand · ${exd.carryDistance} m`);
+    const cb = btn("complete-btn" + (exd.completed ? " done" : ""), () => { exd.completed = !exd.completed; render(); });
+    if (exd.completed) cb.style.background = s.accent;
+    cb.style.borderColor = exd.completed ? s.accent : "#333";
+    cb.textContent = exd.completed ? "✓ Completed" : "Mark Complete";
+    sc.appendChild(cb);
+    d.appendChild(sc);
+  }
+
+  // REGULAR SETS
+  if (!isPlank && !isCarry) {
+    for (let si = 0; si < ex.sets; si++) {
+      const sc = div("set-card");
+      const slabel = el(sc, "div", "set-label", `SET ${si+1}${si===1?" — ramp to failure":""}`);
+      slabel.style.color = s.accent;
+      const sr = div("set-row");
+      // Weight
+      const wg = div("input-group");
+      el(wg, "div", "input-label", "Weight (lbs)");
+      const wi = document.createElement("input");
+      wi.type = "number"; wi.inputMode = "decimal"; wi.className = "num-input";
+      wi.placeholder = getLastData(state.sessionKey, ex.id)?.sets?.[si]?.weight || "0";
+      wi.value = exd.sets?.[si]?.weight || "";
+      wi.addEventListener("input", e => { if (!exd.sets) exd.sets = []; if (!exd.sets[si]) exd.sets[si] = {}; exd.sets[si].weight = e.target.value; });
+      wg.appendChild(wi);
+      sr.appendChild(wg);
+      // Reps
+      const rg = div("input-group");
+      el(rg, "div", "input-label", "Reps");
+      const ri = document.createElement("input");
+      ri.type = "number"; ri.inputMode = "numeric"; ri.className = "num-input";
+      ri.placeholder = getLastData(state.sessionKey, ex.id)?.sets?.[si]?.reps || "0";
+      ri.value = exd.sets?.[si]?.reps || "";
+      ri.addEventListener("input", e => { if (!exd.sets) exd.sets = []; if (!exd.sets[si]) exd.sets[si] = {}; exd.sets[si].reps = e.target.value; });
+      rg.appendChild(ri);
+      sr.appendChild(rg);
+      sc.appendChild(sr);
+      d.appendChild(sc);
+    }
+
+    // Hit failure
+    const fr = div("failure-row");
+    el(fr, "span", "failure-label", "Hit failure on Set 2?");
+    const fb = div("failure-btns");
+    [true, false].forEach(val => {
+      const b = btn("failure-btn" + (exd.hitFailure === val ? " active" : ""), () => { exd.hitFailure = val; render(); });
+      if (exd.hitFailure === val) b.style.background = s.accent;
+      b.textContent = val ? "Yes ✅" : "No ❌";
+      fb.appendChild(b);
+    });
+    fr.appendChild(fb);
+    d.appendChild(fr);
+  }
+
+  // Notes
+  const ng = div("notes-group");
+  el(ng, "div", "input-label", "Notes (optional)");
+  const ta = document.createElement("textarea");
+  ta.className = "notes-input";
+  ta.placeholder = "How did it feel? Any adjustments?";
+  ta.value = exd.notes || "";
+  ta.addEventListener("input", e => { exd.notes = e.target.value; });
+  ng.appendChild(ta);
+  d.appendChild(ng);
+
+  // Nav
+  const nav = div("nav-row");
+  if (state.step > 0) {
+    const pb2 = btn("prev-btn", () => { state.step--; render(); });
+    pb2.textContent = "← Back";
+    nav.appendChild(pb2);
+  }
+  const nb = btn("next-btn", () => {
+    if (isLast) { state.screen = "review"; render(); }
+    else { state.step++; render(); }
+  });
+  nb.style.background = s.accent;
+  nb.textContent = isLast ? "Review Session →" : "Next Exercise →";
+  nav.appendChild(nb);
+  d.appendChild(nav);
+
+  return d;
+}
+
+// ── REVIEW ────────────────────────────────────────────────────
+function renderReview() {
+  const s = getSession();
+  const d = div();
+
+  // Header
+  const rh = div("review-header");
+  rh.style.background = s.color;
+  rh.innerHTML = `<div class="review-letter" style="color:${s.accent}">${state.sessionKey}</div><div><div class="review-title">${s.label} — Complete</div><div class="review-date">${fmtDate(state.sessionDate)}</div></div>`;
+  d.appendChild(rh);
+
+  // Energy
+  const es = div("energy-section");
+  label(es, "HOW DID YOU FEEL?");
+  const eb = div("energy-btns");
+  ENERGY.forEach(e => {
+    const b = btn("energy-btn" + (state.energy === e.v ? " active" : ""), () => { state.energy = e.v; render(); });
+    if (state.energy === e.v) { b.style.background = s.accent; b.style.borderColor = s.accent; }
+    b.innerHTML = `<div class="energy-emoji">${e.e}</div><div class="energy-word">${e.label}</div>`;
+    eb.appendChild(b);
+  });
+  es.appendChild(eb);
+  d.appendChild(es);
+
+  // Summary
+  label(d, "SESSION SUMMARY");
+  s.exercises.forEach(ex => {
+    const exd = state.sessionData[ex.id];
+    if (!exd) return;
+    const rc = div("review-card");
+    el(rc, "div", "review-ex-name", ex.name);
+    if (ex.type === "plank") {
+      const row = div("review-set-row");
+      row.innerHTML = `<span class="review-set-label">${exd.plankSets} sets</span><span class="review-set-val">${exd.plankDuration} sec each</span>${exd.completed ? '<span class="done-green">✓ Done</span>' : ""}`;
+      rc.appendChild(row);
+    } else if (ex.type === "carry") {
+      const row = div("review-set-row");
+      row.innerHTML = `<span class="review-set-label">${exd.carryWeight} lbs / hand</span><span class="review-set-val">${exd.carryDistance} m</span>${exd.completed ? '<span class="done-green">✓ Done</span>' : ""}`;
+      rc.appendChild(row);
+    } else {
+      (exd.sets || []).forEach((st2, i) => {
+        const row = div("review-set-row");
+        row.innerHTML = `<span class="review-set-label">Set ${i+1}</span><span class="review-set-val">${st2.weight ? st2.weight+" lbs" : "—"}</span><span class="review-set-val">${st2.reps ? st2.reps+" reps" : "—"}</span>`;
+        rc.appendChild(row);
+      });
+      if (exd.hitFailure !== null && exd.hitFailure !== undefined)
+        el(rc, "div", "review-meta", `Failure Set 2: ${exd.hitFailure ? "✅ Yes" : "❌ No"}`);
+    }
+    if (exd.notes) el(rc, "div", "review-note", "📝 " + exd.notes);
+    d.appendChild(rc);
+  });
+
+  // Save
+  const sb = btn("save-btn", () => {
+    state.history.push({ id: Date.now(), date: state.sessionDate, sessionKey: state.sessionKey, sessionLabel: s.label, energy: state.energy, exercises: state.sessionData });
+    saveHistory();
+    state.screen = "home"; state.sessionKey = null; state.sessionData = {}; state.energy = null;
+    render();
+  });
+  sb.style.background = s.accent;
+  sb.textContent = "Save Session ✓";
+  d.appendChild(sb);
+
+  const eb2 = btn("edit-btn", () => { state.step = s.exercises.length - 1; state.screen = "session"; render(); });
+  eb2.textContent = "← Go Back and Edit";
+  d.appendChild(eb2);
+
+  return d;
+}
+
+// ── HISTORY DETAIL ────────────────────────────────────────────
+function renderHistoryDetail() {
+  const r = state.viewingRecord;
+  const s = SESSIONS[r.sessionKey];
+  const en = ENERGY.find(e => e.v === r.energy);
+  const d = div();
+
+  const back = btn("back-btn", () => { state.screen = "home"; render(); });
+  back.textContent = "← Back";
+  d.appendChild(back);
+
+  const rh = div("review-header");
+  rh.style.background = s.color;
+  rh.innerHTML = `<div class="review-letter" style="color:${s.accent}">${r.sessionKey}</div><div><div class="review-title">${r.sessionLabel}</div><div class="review-date">${fmtDate(r.date)}</div></div>`;
+  d.appendChild(rh);
+
+  if (en) {
+    const ed = div("energy-display");
+    ed.textContent = `Energy: ${en.e} ${en.label}`;
+    d.appendChild(ed);
+  }
+
+  s.exercises.forEach(ex => {
+    const exd = r.exercises[ex.id];
+    if (!exd) return;
+    const rc = div("review-card");
+    el(rc, "div", "review-ex-name", ex.name);
+    if (ex.type === "plank") {
+      const row = div("review-set-row");
+      row.innerHTML = `<span class="review-set-label">${exd.plankSets} sets</span><span class="review-set-val">${exd.plankDuration} sec each</span>${exd.completed ? '<span class="done-green">✓</span>' : ""}`;
+      rc.appendChild(row);
+    } else if (ex.type === "carry") {
+      const row = div("review-set-row");
+      row.innerHTML = `<span class="review-set-label">${exd.carryWeight} lbs / hand</span><span class="review-set-val">${exd.carryDistance} m</span>${exd.completed ? '<span class="done-green">✓</span>' : ""}`;
+      rc.appendChild(row);
+    } else {
+      (exd.sets || []).forEach((st2, i) => {
+        const row = div("review-set-row");
+        row.innerHTML = `<span class="review-set-label">Set ${i+1}</span><span class="review-set-val">${st2.weight ? st2.weight+" lbs" : "—"}</span><span class="review-set-val">${st2.reps ? st2.reps+" reps" : "—"}</span>`;
+        rc.appendChild(row);
+      });
+      if (exd.hitFailure !== null && exd.hitFailure !== undefined)
+        el(rc, "div", "review-meta", `Failure Set 2: ${exd.hitFailure ? "✅ Yes" : "❌ No"}`);
+    }
+    if (exd.notes) el(rc, "div", "review-note", "📝 " + exd.notes);
+    d.appendChild(rc);
+  });
+
+  return d;
+}
+
+// ─── HELPERS ───────────────────────────────────────────────────
+function div(cls) { const e = document.createElement("div"); if (cls) e.className = cls; return e; }
+function el(parent, tag, cls, text) { const e = document.createElement(tag); e.className = cls; if (text !== undefined) e.textContent = text; parent.appendChild(e); return e; }
+function btn(cls, onclick) { const b = document.createElement("button"); b.className = cls; b.onclick = onclick; return b; }
+function label(parent, text) { el(parent, "div", "section-label", text); }
+
+function stepper(labelText, value, min, max, step, unit, onChange) {
+  const w = div("stepper-wrap");
+  el(w, "div", "stepper-label", labelText);
+  const row = div("stepper-row");
+  const dm = btn("step-btn", () => { if (value > min) onChange(value - step); });
+  dm.textContent = "−";
+  const val = div("stepper-val");
+  val.innerHTML = value + `<span class="stepper-unit"> ${unit}</span>`;
+  const dp = btn("step-btn", () => { if (value < max) onChange(value + step); });
+  dp.textContent = "+";
+  row.appendChild(dm); row.appendChild(val); row.appendChild(dp);
+  w.appendChild(row);
+  return w;
+}
+
+function startSession(key) {
+  state.sessionKey = key;
+  state.step = 0;
+  state.sessionData = {};
+  state.energy = null;
+  state.sessionDate = new Date().toISOString();
+  state.screen = "session";
+  render();
+}
+
+// ─── INIT ──────────────────────────────────────────────────────
+loadHistory();
+render();
+</script>
+</body>
+</html>
