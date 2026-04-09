@@ -19,12 +19,19 @@
   .header-sub { font-size: 12px; color: #666; letter-spacing: 1px; }
 
   /* COMMON */
-  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #555; margin-bottom: 10px; margin-top: 8px; }
-  .last-badge { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #AAA; margin-bottom: 20px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #555; margin-bottom: 10px; margin-top: 18px; }
+  .last-badge { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #AAA; margin-bottom: 8px; }
   .back-btn { background: none; border: none; color: #888; font-size: 14px; cursor: pointer; margin-bottom: 16px; padding: 0; font-family: Georgia, serif; }
 
+  /* NEXT SESSION BANNER */
+  .next-banner { border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
+  .next-banner-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .next-banner-session { font-size: 20px; font-weight: 900; color: #FFF; }
+  .next-banner-sub { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+  .next-banner-go { background: rgba(255,255,255,0.15); border: none; border-radius: 8px; padding: 10px 16px; color: #FFF; font-weight: 700; font-size: 13px; cursor: pointer; font-family: Georgia, serif; white-space: nowrap; }
+
   /* SESSION CARDS */
-  .session-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+  .session-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 8px; }
   .session-card { border: none; border-radius: 12px; padding: 14px 10px; cursor: pointer; text-align: center; display: flex; flex-direction: column; gap: 4px; }
   .session-card-letter { font-size: 32px; font-weight: 900; line-height: 1; }
   .session-card-label { font-size: 11px; font-weight: 700; color: #FFF; letter-spacing: 1px; }
@@ -86,9 +93,16 @@
   .notes-input { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 8px; padding: 10px 12px; color: #CCC; font-size: 14px; resize: vertical; min-height: 60px; font-family: Georgia, serif; width: 100%; }
 
   /* NAV */
-  .nav-row { display: flex; gap: 10px; margin-top: 4px; }
+  .nav-row { display: flex; gap: 10px; margin-top: 4px; flex-wrap: wrap; }
   .next-btn { flex: 1; border: none; border-radius: 10px; padding: 14px; color: #FFF; font-weight: 700; font-size: 15px; cursor: pointer; font-family: Georgia, serif; }
   .prev-btn { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 14px 18px; color: #AAA; font-weight: 600; font-size: 14px; cursor: pointer; font-family: Georgia, serif; }
+  .skip-btn { background: none; border: 1px solid #333; border-radius: 8px; padding: 8px 16px; color: #666; font-size: 12px; font-weight: 600; cursor: pointer; font-family: Georgia, serif; letter-spacing: 1px; }
+
+  /* SKIPPED */
+  .skipped-section { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; }
+  .skipped-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #FF9500; margin-bottom: 8px; }
+  .skipped-item { font-size: 13px; color: #AAA; padding: 4px 0; display: flex; align-items: center; justify-content: space-between; }
+  .return-btn { background: none; border: 1px solid #444; border-radius: 6px; padding: 4px 10px; color: #AAA; font-size: 11px; cursor: pointer; font-family: Georgia, serif; }
 
   /* REVIEW */
   .review-header { border-radius: 12px; padding: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
@@ -113,14 +127,31 @@
   .energy-display { background: #1A1A1A; border-radius: 10px; padding: 10px 14px; font-size: 14px; color: #AAA; margin-bottom: 14px; }
   .done-green { color: #52B788; font-size: 13px; }
   .stepper-flex { display: flex; gap: 16px; margin-bottom: 16px; }
+
+  /* TOOLS / EXPORT / IMPORT */
+  .tools-row { display: flex; gap: 8px; margin-top: 8px; margin-bottom: 8px; }
+  .tool-btn { flex: 1; background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 10px; padding: 11px 6px; color: #888; font-size: 11px; font-weight: 700; letter-spacing: 1px; cursor: pointer; font-family: Georgia, serif; text-align: center; line-height: 1.4; }
+  .tool-btn-drive { flex: 1; background: #1A2A3A; border: 1px solid #2A3A4A; border-radius: 10px; padding: 11px 6px; color: #5B8DEF; font-size: 11px; font-weight: 700; letter-spacing: 1px; cursor: pointer; font-family: Georgia, serif; text-align: center; line-height: 1.4; }
+  .import-panel { background: #0F0F0F; border: 1px solid #333; border-radius: 12px; padding: 16px; margin-top: 12px; margin-bottom: 8px; }
+  .import-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #888; margin-bottom: 10px; }
+  .import-textarea { width: 100%; background: #1A1A1A; border: 1px solid #333; border-radius: 8px; padding: 10px 12px; color: #CCC; font-size: 12px; font-family: monospace; resize: vertical; min-height: 80px; }
+  .import-btn { width: 100%; background: #1B4332; border: none; border-radius: 8px; padding: 12px; color: #52B788; font-weight: 700; font-size: 14px; cursor: pointer; font-family: Georgia, serif; margin-top: 10px; }
+  .import-msg { font-size: 12px; margin-top: 8px; padding: 8px 10px; border-radius: 6px; }
+  .import-ok { background: #1B4332; color: #52B788; }
+  .import-err { background: #3A1A1A; color: #FF6B6B; }
+
+  /* PENDING CHANGES */
+  .changes-panel { background: #1A1200; border: 1px solid #3A2800; border-radius: 10px; padding: 12px 14px; margin-top: 12px; }
+  .changes-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #FF9500; margin-bottom: 8px; }
+  .changes-item { font-size: 12px; color: #CCA855; padding: 3px 0; border-bottom: 1px solid #2A1A00; }
+  .changes-item:last-child { border-bottom: none; }
 </style>
 </head>
 <body>
 <div id="app"></div>
 
 <script>
-// ─── VERSION ───────────────────────────────────────────────────
-const VERSION = "1.2 — April 2026";
+const VERSION = "1.5 — April 2026";
 
 // ─── SESSION DATA ──────────────────────────────────────────────
 const SESSIONS = {
@@ -128,61 +159,64 @@ const SESSIONS = {
     label: "SESSION A", subtitle: "Chest · Back · Biceps · Legs",
     color: "#1B4332", accent: "#52B788",
     exercises: [
-      { id: "chest_press",  name: "Chest Press",              sets: 2, notes: "Set 1 moderate · Set 2 ramp to ~failure at 8 reps" },
-      { id: "lat_pulldown", name: "Lat Pulldown",             sets: 2, notes: "Ramp protocol" },
-      { id: "seated_row_a", name: "Seated Row",               sets: 2, notes: "Ramp protocol" },
-      { id: "ez_curl",      name: "Cable / EZ Bar Curl",      sets: 2, notes: "Ramp protocol" },
-      { id: "leg_press_a",  name: "Leg Press",                sets: 2, notes: "Ramp protocol" },
-      { id: "leg_curl_a",   name: "Leg Curl (Hamstring)",     sets: 2, notes: "Ramp protocol — quad/hamstring balance" },
-      { id: "face_pull",    name: "Cable Face Pull",          sets: 2, notes: "Light weight, full range — rear delt & rotator cuff" },
-      { id: "plank_a",      name: "Plank",   type: "plank",  defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
-      { id: "carry_a",      name: "Farmer Carry", type: "carry", defaultWeight: 30, defaultDistance: 120, notes: "Closing anchor — adjust weight as you progress" },
+      { id: "chest_press",   name: "Chest Press",            sets: 2, notes: "Set 1 moderate · Set 2 ramp to failure" },
+      { id: "lat_pulldown",  name: "Lat Pulldown",           sets: 2, notes: "Ramp protocol" },
+      { id: "seated_row_a",  name: "Seated Row",             sets: 2, notes: "Ramp protocol" },
+      { id: "chin_up_a",     name: "Assisted Chin-Up",       type: "chinup", notes: "4-part sequence — see below" },
+      { id: "ez_curl",       name: "Cable / EZ Bar Curl",    sets: 2, notes: "Ramp protocol" },
+      { id: "leg_press_a",   name: "Leg Press",              sets: 2, notes: "Ramp protocol" },
+      { id: "leg_curl_a",    name: "Leg Curl (Hamstring)",   sets: 2, notes: "Ramp protocol — quad/hamstring balance" },
+      { id: "face_pull",     name: "Cable Face Pull",        sets: 2, notes: "Light weight, full range — rear delt & rotator cuff" },
+      { id: "plank_a",       name: "Plank",  type: "plank", defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
+      { id: "carry_a",       name: "Farmer Carry", type: "carry", defaultWeight: 30, defaultDistance: 120, notes: "Closing anchor" },
     ]
   },
   B: {
     label: "SESSION B", subtitle: "Shoulders · Triceps · Lower Body",
     color: "#1C3461", accent: "#5B8DEF",
     exercises: [
-      { id: "shoulder_press", name: "Shoulder Press",               sets: 2, notes: "Ramp protocol" },
-      { id: "lateral_raise",  name: "Lateral Raise Machine",        sets: 2, notes: "Light — shoulder stabilizer health" },
-      { id: "tricep_pushdown",name: "Triceps Pushdown",             sets: 2, notes: "Ramp protocol" },
-      { id: "assisted_chin",  name: "Assisted Chin / Pulldown",     sets: 2, notes: "Ramp protocol" },
-      { id: "hip_abduction",  name: "Hip Abduction",                sets: 2, notes: "Glute med — fall prevention" },
-      { id: "hip_adduction",  name: "Hip Adduction",                sets: 2, notes: "Inner thigh balance" },
-      { id: "glute_press",    name: "Glute Press / Cable Kickback", sets: 2, notes: "Hip hinge pattern — largest muscle group" },
-      { id: "calf_raise",     name: "Seated Calf Raise",            sets: 2, notes: "Balance, ankle stability, circulation" },
-      { id: "plank_b",        name: "Plank",   type: "plank",  defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
-      { id: "carry_b",        name: "Farmer Carry", type: "carry", defaultWeight: 30, defaultDistance: 120, notes: "Closing anchor — adjust weight as you progress" },
+      { id: "shoulder_press",  name: "Shoulder Press",               sets: 2, notes: "Ramp protocol" },
+      { id: "lateral_raise",   name: "Lateral Raise Machine",        sets: 2, notes: "Light — shoulder stabilizer health" },
+      { id: "tricep_pushdown", name: "Triceps Pushdown",             sets: 2, notes: "Ramp protocol" },
+      { id: "assisted_chin",   name: "Assisted Chin / Pulldown",     sets: 2, notes: "Ramp protocol" },
+      { id: "hip_abduction",   name: "Hip Abduction",                sets: 2, notes: "Glute med — fall prevention" },
+      { id: "hip_adduction",   name: "Hip Adduction",                sets: 2, notes: "Inner thigh balance" },
+      { id: "glute_press",     name: "Glute Press / Cable Kickback", sets: 2, notes: "Hip hinge pattern — largest muscle group" },
+      { id: "calf_raise",      name: "Seated Calf Raise",            sets: 2, notes: "Balance, ankle stability, circulation" },
+      { id: "plank_b",         name: "Plank",  type: "plank", defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
+      { id: "carry_b",         name: "Farmer Carry", type: "carry", defaultWeight: 30, defaultDistance: 120, notes: "Closing anchor" },
     ]
   },
   C: {
     label: "SESSION C", subtitle: "Full Body Power Day",
     color: "#4A1942", accent: "#C77DFF",
     exercises: [
-      { id: "leg_press_c",    name: "Leg Press",                         sets: 2, notes: "Go heavier — this is your power day" },
-      { id: "chest_press_c",  name: "Chest Press",                       sets: 2, notes: "Ramp protocol" },
-      { id: "seated_row_c",   name: "Seated Row",                        sets: 2, notes: "Ramp protocol" },
-      { id: "shoulder_press_c",name: "Shoulder Press",                   sets: 2, notes: "Ramp protocol" },
-      { id: "leg_curl_c",     name: "Leg Curl (Hamstring)",              sets: 2, notes: "Hamstring balance — do not skip" },
-      { id: "cable_curl_c",   name: "Cable / EZ Bar Curl",               sets: 2, notes: "Ramp protocol" },
-      { id: "rotary_torso",   name: "Rotary Torso / Cable Woodchop",     sets: 2, notes: "Both sides — controlled tempo" },
-      { id: "plank_c",        name: "Plank",   type: "plank",  defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
-      { id: "carry_c",        name: "Farmer Carry", type: "carry", defaultWeight: 35, defaultDistance: 120, notes: "Power day — stepped up carry weight" },
+      { id: "leg_press_c",      name: "Leg Press",                     sets: 2, notes: "Go heavier — power day" },
+      { id: "chest_press_c",    name: "Chest Press",                   sets: 2, notes: "Ramp protocol" },
+      { id: "seated_row_c",     name: "Seated Row",                    sets: 2, notes: "Ramp protocol" },
+      { id: "shoulder_press_c", name: "Shoulder Press",                sets: 2, notes: "Ramp protocol" },
+      { id: "leg_curl_c",       name: "Leg Curl (Hamstring)",          sets: 2, notes: "Hamstring balance — do not skip" },
+      { id: "cable_curl_c",     name: "Cable / EZ Bar Curl",           sets: 2, notes: "Ramp protocol" },
+      { id: "rotary_torso",     name: "Rotary Torso / Cable Woodchop", sets: 2, notes: "Both sides — controlled tempo" },
+      { id: "plank_c",          name: "Plank",  type: "plank", defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
+      { id: "carry_c",          name: "Farmer Carry", type: "carry", defaultWeight: 35, defaultDistance: 120, notes: "Power day — stepped up carry weight" },
     ]
   }
 };
 
+const ROTATION = ["A", "B", "C"];
+
 const ENERGY = [
-  { v: 1, label: "Low",      e: "😓" },
-  { v: 2, label: "Moderate", e: "😐" },
-  { v: 3, label: "Good",     e: "💪" },
-  { v: 4, label: "Strong",   e: "🔥" },
-  { v: 5, label: "Best ever",e: "⚡" },
+  { v: 1, label: "Low",       e: "😓" },
+  { v: 2, label: "Moderate",  e: "😐" },
+  { v: 3, label: "Good",      e: "💪" },
+  { v: 4, label: "Strong",    e: "🔥" },
+  { v: 5, label: "Best ever", e: "⚡" },
 ];
 
 // ─── STATE ─────────────────────────────────────────────────────
 let state = {
-  screen: "home",       // home | session | review | history
+  screen: "home",
   sessionKey: null,
   step: 0,
   sessionData: {},
@@ -190,33 +224,95 @@ let state = {
   sessionDate: null,
   viewingRecord: null,
   history: [],
+  pendingChanges: [],   // routine change requests logged during chat
+  skippedExercises: [],
+  showImport: false,
+  importMsg: null,
 };
 
-function loadHistory() {
+function loadState() {
   try { state.history = JSON.parse(localStorage.getItem("victor_gym_history") || "[]"); } catch { state.history = []; }
+  try { state.pendingChanges = JSON.parse(localStorage.getItem("victor_gym_changes") || "[]"); } catch { state.pendingChanges = []; }
 }
 
 function saveHistory() {
   localStorage.setItem("victor_gym_history", JSON.stringify(state.history));
 }
 
+function savePendingChanges() {
+  localStorage.setItem("victor_gym_changes", JSON.stringify(state.pendingChanges));
+}
+
+// ─── NEXT SESSION LOGIC ────────────────────────────────────────
+function getNextSession() {
+  if (state.history.length === 0) return "A";
+  const last = state.history[state.history.length - 1].sessionKey;
+  const idx = ROTATION.indexOf(last);
+  return ROTATION[(idx + 1) % ROTATION.length];
+}
+
+// ─── EXPORT ────────────────────────────────────────────────────
+function buildExportData() {
+  const next = getNextSession();
+  const today = new Date().toISOString().slice(0, 10);
+  return {
+    exportDate: today,
+    nextSession: next,
+    history: state.history,
+    pendingChanges: state.pendingChanges,
+    _info: "Victor's Gym Tracker — upload this file to Claude chat to begin your session"
+  };
+}
+
+function exportToDownloads() {
+  const next = getNextSession();
+  const today = new Date().toISOString().slice(0, 10);
+  const filename = `victor_gym_${today}_next${next}.json`;
+  const data = JSON.stringify(buildExportData(), null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename; a.click();
+  URL.revokeObjectURL(url);
+  return filename;
+}
+
+function exportToDrive() {
+  // Save to downloads first
+  const filename = exportToDownloads();
+  // Then open Google Drive in new tab
+  setTimeout(() => {
+    window.open("https://drive.google.com/drive/my-drive", "_blank");
+    alert(`File "${filename}" saved to Downloads.\n\nGoogle Drive is now open — tap the + button and upload the file from your Downloads folder.`);
+  }, 500);
+}
+
+// ─── HELPERS ───────────────────────────────────────────────────
 function getSession() { return SESSIONS[state.sessionKey]; }
 function getExercise() { return getSession()?.exercises[state.step]; }
 
-function getExData(id) {
+function getExData() {
   const ex = getExercise();
   if (!ex) return {};
-  id = id || ex.id;
-  if (!state.sessionData[id]) {
-    const last = getLastData(state.sessionKey, id);
+  if (!state.sessionData[ex.id]) {
+    const last = getLastData(state.sessionKey, ex.id);
     if (ex.type === "plank")
-      state.sessionData[id] = { plankSets: last?.plankSets ?? ex.defaultSets, plankDuration: last?.plankDuration ?? ex.defaultDuration, notes: "", completed: false };
+      state.sessionData[ex.id] = { plankSets: last?.plankSets ?? ex.defaultSets, plankDuration: last?.plankDuration ?? ex.defaultDuration, notes: "", completed: false };
     else if (ex.type === "carry")
-      state.sessionData[id] = { carryWeight: last?.carryWeight ?? ex.defaultWeight, carryDistance: last?.carryDistance ?? ex.defaultDistance, notes: "", completed: false };
+      state.sessionData[ex.id] = { carryWeight: last?.carryWeight ?? ex.defaultWeight, carryDistance: last?.carryDistance ?? ex.defaultDistance, notes: "", completed: false };
+    else if (ex.type === "chinup")
+      state.sessionData[ex.id] = {
+        chinReps: last?.chinReps ?? 8,
+        negReps: last?.negReps ?? 6,
+        holdTopSec: last?.holdTopSec ?? 20,
+        holdBotSec: last?.holdBotSec ?? 20,
+        assistWeight: last?.assistWeight ?? 50,
+        notes: "", completed: false
+      };
     else
-      state.sessionData[id] = { sets: [{weight:"",reps:""},{weight:"",reps:""}], notes: "", hitFailure: null };
+      state.sessionData[ex.id] = { sets: [{weight:"",reps:""},{weight:"",reps:""}], notes: "", hitFailure: null };
   }
-  return state.sessionData[id];
+  return state.sessionData[ex.id];
 }
 
 function getLastData(sessionKey, exerciseId) {
@@ -226,6 +322,26 @@ function getLastData(sessionKey, exerciseId) {
 
 function fmtDate(iso) {
   return new Date(iso).toLocaleDateString("en-CA", { weekday: "short", year: "numeric", month: "short", day: "numeric" });
+}
+
+function div(cls) { const e = document.createElement("div"); if (cls) e.className = cls; return e; }
+function el(parent, tag, cls, text) { const e = document.createElement(tag); e.className = cls; if (text !== undefined) e.textContent = text; parent.appendChild(e); return e; }
+function btn(cls, onclick) { const b = document.createElement("button"); b.className = cls; b.onclick = onclick; return b; }
+function label(parent, text) { el(parent, "div", "section-label", text); }
+
+function stepper(labelText, value, min, max, step, unit, onChange) {
+  const w = div("stepper-wrap");
+  el(w, "div", "stepper-label", labelText);
+  const row = div("stepper-row");
+  const dm = btn("step-btn", () => { if (value > min) onChange(value - step); });
+  dm.textContent = "−";
+  const val = div("stepper-val");
+  val.innerHTML = value + `<span class="stepper-unit"> ${unit}</span>`;
+  const dp = btn("step-btn", () => { if (value < max) onChange(value + step); });
+  dp.textContent = "+";
+  row.appendChild(dm); row.appendChild(val); row.appendChild(dp);
+  w.appendChild(row);
+  return w;
 }
 
 // ─── RENDER ────────────────────────────────────────────────────
@@ -241,10 +357,24 @@ function render() {
 // ── HOME ──────────────────────────────────────────────────────
 function renderHome() {
   const d = div();
+
   // Header
   const hdr = div("header");
   hdr.innerHTML = `<div class="logo">V</div><div><div class="header-title">VICTOR'S GYM</div><div class="header-sub">Guided Session Tracker · ${VERSION}</div></div>`;
   d.appendChild(hdr);
+
+  // Next session banner
+  const next = getNextSession();
+  const ns = SESSIONS[next];
+  const banner = div("next-banner");
+  banner.style.background = ns.color;
+  const bannerLeft = div();
+  bannerLeft.innerHTML = `<div class="next-banner-label">UP NEXT</div><div class="next-banner-session" style="color:${ns.accent}">SESSION ${next}</div><div class="next-banner-sub">${ns.subtitle}</div>`;
+  const goBtn = btn("next-banner-go", () => startSession(next));
+  goBtn.textContent = "Start →";
+  banner.appendChild(bannerLeft);
+  banner.appendChild(goBtn);
+  d.appendChild(banner);
 
   // Last session badge
   if (state.history.length > 0) {
@@ -255,12 +385,23 @@ function renderHome() {
     d.appendChild(b);
   }
 
-  // Session cards
-  label(d, "START A SESSION");
+  // Pending changes notice
+  if (state.pendingChanges.length > 0) {
+    const cp = div("changes-panel");
+    el(cp, "div", "changes-title", `⚠ ${state.pendingChanges.length} ROUTINE CHANGE${state.pendingChanges.length > 1 ? "S" : ""} PENDING — ACTION ON PC`);
+    state.pendingChanges.forEach(c => {
+      el(cp, "div", "changes-item", `${c.date}: ${c.note}`);
+    });
+    d.appendChild(cp);
+  }
+
+  // All session cards
+  label(d, "ALL SESSIONS");
   const grid = div("session-grid");
   Object.entries(SESSIONS).forEach(([key, s]) => {
     const card = btn("session-card", () => startSession(key));
     card.style.background = s.color;
+    card.style.opacity = key === next ? "1" : "0.6";
     card.innerHTML = `
       <div class="session-card-letter" style="color:${s.accent}">${key}</div>
       <div class="session-card-label">${s.label}</div>
@@ -274,7 +415,7 @@ function renderHome() {
   if (state.history.length > 0) {
     label(d, "RECENT SESSIONS");
     const list = div("history-list");
-    [...state.history].reverse().slice(0, 12).forEach(r => {
+    [...state.history].reverse().slice(0, 10).forEach(r => {
       const s = SESSIONS[r.sessionKey];
       const en = ENERGY.find(e => e.v === r.energy);
       const row = btn("history-row", () => { state.viewingRecord = r; state.screen = "history"; render(); });
@@ -288,6 +429,80 @@ function renderHome() {
     });
     d.appendChild(list);
   }
+
+  // Tools
+  label(d, "TOOLS");
+
+  // Export row
+  const er = div("tools-row");
+  const dlBtn = btn("tool-btn", () => {
+    const f = exportToDownloads();
+    dlBtn.textContent = `✓ Saved`;
+    setTimeout(() => { dlBtn.textContent = "📥 SAVE TO\nPHONE"; render(); }, 2000);
+  });
+  dlBtn.style.whiteSpace = "pre";
+  dlBtn.textContent = "📥 SAVE TO\nPHONE";
+  er.appendChild(dlBtn);
+
+  const driveBtn = btn("tool-btn-drive", () => exportToDrive());
+  driveBtn.style.whiteSpace = "pre";
+  driveBtn.textContent = "☁️ SAVE TO\nDRIVE + PHONE";
+  er.appendChild(driveBtn);
+  d.appendChild(er);
+
+  // Import row
+  const ir = div("tools-row");
+  const impBtn = btn("tool-btn", () => { state.showImport = !state.showImport; render(); });
+  impBtn.textContent = "📤 IMPORT FROM FILE";
+  ir.appendChild(impBtn);
+  d.appendChild(ir);
+
+  // Import panel
+  if (state.showImport) {
+    const panel = div("import-panel");
+    el(panel, "div", "import-title", "PASTE JSON OR USE FILE UPLOAD ABOVE IN CLAUDE CHAT");
+    const ta = document.createElement("textarea");
+    ta.className = "import-textarea";
+    ta.placeholder = "Paste exported JSON here if importing manually...";
+    panel.appendChild(ta);
+    const ib = btn("import-btn", () => {
+      try {
+        const raw = ta.value.trim();
+        const parsed = JSON.parse(raw);
+        // Accept full export object or bare history array
+        const records = parsed.history ? parsed.history : (Array.isArray(parsed) ? parsed : [parsed]);
+        const changes = parsed.pendingChanges || [];
+        records.forEach(r => { if (!r.sessionKey || !r.exercises) throw new Error("Invalid"); });
+        const existingIds = new Set(state.history.map(h => h.id));
+        let added = 0;
+        records.forEach(r => { if (!existingIds.has(r.id)) { state.history.push(r); added++; } });
+        // Merge pending changes
+        changes.forEach(c => {
+          if (!state.pendingChanges.find(p => p.date === c.date && p.note === c.note))
+            state.pendingChanges.push(c);
+        });
+        saveHistory(); savePendingChanges();
+        state.showImport = false;
+        state.importMsg = { ok: true, text: `✓ Imported ${added} session${added !== 1 ? "s" : ""} successfully` };
+        render();
+      } catch(e) {
+        const msg = div("import-msg import-err");
+        msg.textContent = "❌ Invalid format — check and try again";
+        panel.appendChild(msg);
+      }
+    });
+    ib.textContent = "Import & Save →";
+    panel.appendChild(ib);
+    d.appendChild(panel);
+  }
+
+  if (state.importMsg) {
+    const msg = div("import-msg " + (state.importMsg.ok ? "import-ok" : "import-err"));
+    msg.textContent = state.importMsg.text;
+    d.appendChild(msg);
+    state.importMsg = null;
+  }
+
   return d;
 }
 
@@ -298,14 +513,13 @@ function renderSession() {
   const exd = getExData();
   const total = s.exercises.length;
   const progress = (state.step / total) * 100;
-  const isLast = state.step === total - 1;
   const isPlank = ex.type === "plank";
   const isCarry = ex.type === "carry";
+  const isChinup = ex.type === "chinup";
   const last = getLastData(state.sessionKey, ex.id);
-
   const d = div();
 
-  // Progress
+  // Progress bar
   const pb = div("progress-bar");
   const pf = div("progress-fill");
   pf.style.width = progress + "%";
@@ -319,19 +533,24 @@ function renderSession() {
   sh.innerHTML = `<div class="session-label-tag" style="color:${s.accent}">${s.label}</div><div class="step-count">Exercise ${state.step + 1} of ${total}</div>`;
   d.appendChild(sh);
 
-  // Exercise name & hint
   el(d, "div", "ex-name", ex.name);
   el(d, "div", "ex-hint", ex.notes);
 
-  // Last session
+  // Last time card
   if (last) {
     const lc = div("last-card");
     el(lc, "div", "last-title", "LAST TIME");
     if (isPlank) el(lc, "div", "last-row", `${last.plankSets} sets · ${last.plankDuration} sec each`);
     else if (isCarry) el(lc, "div", "last-row", `${last.carryWeight} lbs each hand · ${last.carryDistance} m`);
-    else (last.sets || []).forEach((st2, i) => el(lc, "div", "last-row", `Set ${i+1}: ${st2.weight||"—"} lbs · ${st2.reps||"—"} reps`));
-    if (!isPlank && !isCarry && last.hitFailure !== null && last.hitFailure !== undefined)
-      el(lc, "div", "last-row", `Failure: ${last.hitFailure ? "Yes ✅" : "No ❌"}`);
+    else if (isChinup) {
+      el(lc, "div", "last-row", `Chin-ups: ${last.chinReps} reps · Assist: ${last.assistWeight} lbs`);
+      el(lc, "div", "last-row", `Negatives: ${last.negReps} reps`);
+      el(lc, "div", "last-row", `Hold top: ${last.holdTopSec}s · Hold bottom: ${last.holdBotSec}s`);
+    } else {
+      (last.sets || []).forEach((st2, i) => el(lc, "div", "last-row", `Set ${i+1}: ${st2.weight||"—"} lbs · ${st2.reps||"—"} reps`));
+      if (last.hitFailure !== null && last.hitFailure !== undefined)
+        el(lc, "div", "last-row", `Failure: ${last.hitFailure ? "Yes ✅" : "No ❌"}`);
+    }
     d.appendChild(lc);
   }
 
@@ -343,8 +562,7 @@ function renderSession() {
     sf.appendChild(stepper("Sets", exd.plankSets, 1, 5, 1, "sets", v => { exd.plankSets = v; render(); }));
     sf.appendChild(stepper("Duration", exd.plankDuration, 15, 180, 15, "sec", v => { exd.plankDuration = v; render(); }));
     sc.appendChild(sf);
-    const total_sec = exd.plankSets * exd.plankDuration;
-    el(sc, "div", "summary-line", `${exd.plankSets} × ${exd.plankDuration} sec = ${Math.round(total_sec/60*10)/10} min total`);
+    el(sc, "div", "summary-line", `${exd.plankSets} × ${exd.plankDuration} sec = ${Math.round(exd.plankSets * exd.plankDuration / 60 * 10) / 10} min`);
     const cb = btn("complete-btn" + (exd.completed ? " done" : ""), () => { exd.completed = !exd.completed; render(); });
     if (exd.completed) cb.style.background = s.accent;
     cb.style.borderColor = exd.completed ? s.accent : "#333";
@@ -370,14 +588,38 @@ function renderSession() {
     d.appendChild(sc);
   }
 
+  // CHIN-UP (4-part sequence)
+  if (isChinup) {
+    const sc = div("set-card");
+    el(sc, "div", "set-label", "CHIN-UP SEQUENCE").style.color = s.accent;
+    // Assist weight
+    const sf0 = div("stepper-flex");
+    sf0.appendChild(stepper("Assist Weight", exd.assistWeight, 10, 120, 5, "lbs", v => { exd.assistWeight = v; render(); }));
+    sc.appendChild(sf0);
+    const sf1 = div("stepper-flex");
+    sf1.appendChild(stepper("i. Chin-Ups", exd.chinReps, 1, 20, 1, "reps", v => { exd.chinReps = v; render(); }));
+    sf1.appendChild(stepper("ii. Negatives", exd.negReps, 1, 20, 1, "reps", v => { exd.negReps = v; render(); }));
+    sc.appendChild(sf1);
+    const sf2 = div("stepper-flex");
+    sf2.appendChild(stepper("iii. Hold Top", exd.holdTopSec, 5, 60, 5, "sec", v => { exd.holdTopSec = v; render(); }));
+    sf2.appendChild(stepper("iv. Hold Bottom", exd.holdBotSec, 5, 60, 5, "sec", v => { exd.holdBotSec = v; render(); }));
+    sc.appendChild(sf2);
+    el(sc, "div", "summary-line", `${exd.chinReps} chin-ups · ${exd.negReps} negatives · ${exd.holdTopSec}s top · ${exd.holdBotSec}s bottom`);
+    const cb = btn("complete-btn" + (exd.completed ? " done" : ""), () => { exd.completed = !exd.completed; render(); });
+    if (exd.completed) cb.style.background = s.accent;
+    cb.style.borderColor = exd.completed ? s.accent : "#333";
+    cb.textContent = exd.completed ? "✓ Completed" : "Mark Complete";
+    sc.appendChild(cb);
+    d.appendChild(sc);
+  }
+
   // REGULAR SETS
-  if (!isPlank && !isCarry) {
+  if (!isPlank && !isCarry && !isChinup) {
     for (let si = 0; si < ex.sets; si++) {
       const sc = div("set-card");
-      const slabel = el(sc, "div", "set-label", `SET ${si+1}${si===1?" — ramp to failure":""}`);
+      const slabel = el(sc, "div", "set-label", `SET ${si + 1}${si === 1 ? " — ramp to failure" : " — moderate"}`);
       slabel.style.color = s.accent;
       const sr = div("set-row");
-      // Weight
       const wg = div("input-group");
       el(wg, "div", "input-label", "Weight (lbs)");
       const wi = document.createElement("input");
@@ -385,9 +627,7 @@ function renderSession() {
       wi.placeholder = getLastData(state.sessionKey, ex.id)?.sets?.[si]?.weight || "0";
       wi.value = exd.sets?.[si]?.weight || "";
       wi.addEventListener("input", e => { if (!exd.sets) exd.sets = []; if (!exd.sets[si]) exd.sets[si] = {}; exd.sets[si].weight = e.target.value; });
-      wg.appendChild(wi);
-      sr.appendChild(wg);
-      // Reps
+      wg.appendChild(wi); sr.appendChild(wg);
       const rg = div("input-group");
       el(rg, "div", "input-label", "Reps");
       const ri = document.createElement("input");
@@ -395,13 +635,10 @@ function renderSession() {
       ri.placeholder = getLastData(state.sessionKey, ex.id)?.sets?.[si]?.reps || "0";
       ri.value = exd.sets?.[si]?.reps || "";
       ri.addEventListener("input", e => { if (!exd.sets) exd.sets = []; if (!exd.sets[si]) exd.sets[si] = {}; exd.sets[si].reps = e.target.value; });
-      rg.appendChild(ri);
-      sr.appendChild(rg);
+      rg.appendChild(ri); sr.appendChild(rg);
       sc.appendChild(sr);
       d.appendChild(sc);
     }
-
-    // Hit failure
     const fr = div("failure-row");
     el(fr, "span", "failure-label", "Hit failure on Set 2?");
     const fb = div("failure-btns");
@@ -426,6 +663,23 @@ function renderSession() {
   ng.appendChild(ta);
   d.appendChild(ng);
 
+  // Skipped reminder
+  const skippedInSession = state.skippedExercises.filter(i => i !== state.step);
+  if (skippedInSession.length > 0) {
+    const ss = div("skipped-section");
+    el(ss, "div", "skipped-title", "⏭ SKIPPED — COME BACK TO");
+    skippedInSession.forEach(idx => {
+      const skEx = s.exercises[idx];
+      const row = div("skipped-item");
+      row.innerHTML = `<span>${skEx.name}</span>`;
+      const rb = btn("return-btn", () => { state.step = idx; state.skippedExercises = state.skippedExercises.filter(i => i !== idx); render(); });
+      rb.textContent = "Do Now";
+      row.appendChild(rb);
+      ss.appendChild(row);
+    });
+    d.appendChild(ss);
+  }
+
   // Nav
   const nav = div("nav-row");
   if (state.step > 0) {
@@ -433,12 +687,31 @@ function renderSession() {
     pb2.textContent = "← Back";
     nav.appendChild(pb2);
   }
+  if (!state.skippedExercises.includes(state.step)) {
+    const skipB = btn("skip-btn", () => {
+      state.skippedExercises.push(state.step);
+      const tot2 = s.exercises.length;
+      let next = state.step + 1;
+      while (next < tot2 && state.skippedExercises.includes(next)) next++;
+      if (next < tot2) { state.step = next; render(); }
+      else { state.screen = "review"; render(); }
+    });
+    skipB.textContent = "Skip ⏭";
+    nav.appendChild(skipB);
+  }
   const nb = btn("next-btn", () => {
-    if (isLast) { state.screen = "review"; render(); }
-    else { state.step++; render(); }
+    state.skippedExercises = state.skippedExercises.filter(i => i !== state.step);
+    const tot2 = s.exercises.length;
+    let next = state.step + 1;
+    while (next < tot2 && state.skippedExercises.includes(next)) next++;
+    if (next >= tot2) {
+      if (state.skippedExercises.length > 0) { state.step = state.skippedExercises[0]; render(); }
+      else { state.screen = "review"; render(); }
+    } else { state.step = next; render(); }
   });
   nb.style.background = s.accent;
-  nb.textContent = isLast ? "Review Session →" : "Next Exercise →";
+  const allDone = state.step === total - 1 && state.skippedExercises.filter(i => i !== state.step).length === 0;
+  nb.textContent = allDone ? "Review Session →" : "Next →";
   nav.appendChild(nb);
   d.appendChild(nav);
 
@@ -450,13 +723,11 @@ function renderReview() {
   const s = getSession();
   const d = div();
 
-  // Header
   const rh = div("review-header");
   rh.style.background = s.color;
   rh.innerHTML = `<div class="review-letter" style="color:${s.accent}">${state.sessionKey}</div><div><div class="review-title">${s.label} — Complete</div><div class="review-date">${fmtDate(state.sessionDate)}</div></div>`;
   d.appendChild(rh);
 
-  // Energy
   const es = div("energy-section");
   label(es, "HOW DID YOU FEEL?");
   const eb = div("energy-btns");
@@ -469,7 +740,6 @@ function renderReview() {
   es.appendChild(eb);
   d.appendChild(es);
 
-  // Summary
   label(d, "SESSION SUMMARY");
   s.exercises.forEach(ex => {
     const exd = state.sessionData[ex.id];
@@ -478,16 +748,23 @@ function renderReview() {
     el(rc, "div", "review-ex-name", ex.name);
     if (ex.type === "plank") {
       const row = div("review-set-row");
-      row.innerHTML = `<span class="review-set-label">${exd.plankSets} sets</span><span class="review-set-val">${exd.plankDuration} sec each</span>${exd.completed ? '<span class="done-green">✓ Done</span>' : ""}`;
+      row.innerHTML = `<span class="review-set-label">${exd.plankSets} sets</span><span class="review-set-val">${exd.plankDuration} sec</span>${exd.completed ? '<span class="done-green">✓</span>' : ""}`;
       rc.appendChild(row);
     } else if (ex.type === "carry") {
       const row = div("review-set-row");
-      row.innerHTML = `<span class="review-set-label">${exd.carryWeight} lbs / hand</span><span class="review-set-val">${exd.carryDistance} m</span>${exd.completed ? '<span class="done-green">✓ Done</span>' : ""}`;
+      row.innerHTML = `<span class="review-set-label">${exd.carryWeight} lbs/hand</span><span class="review-set-val">${exd.carryDistance} m</span>${exd.completed ? '<span class="done-green">✓</span>' : ""}`;
       rc.appendChild(row);
+    } else if (ex.type === "chinup") {
+      const row = div("review-set-row");
+      row.innerHTML = `<span class="review-set-label">Assist: ${exd.assistWeight} lbs</span><span class="review-set-val">${exd.chinReps} chin-ups</span><span class="review-set-val">${exd.negReps} neg</span>`;
+      rc.appendChild(row);
+      const row2 = div("review-set-row");
+      row2.innerHTML = `<span class="review-set-label">Holds:</span><span class="review-set-val">Top ${exd.holdTopSec}s</span><span class="review-set-val">Bot ${exd.holdBotSec}s</span>${exd.completed ? '<span class="done-green">✓</span>' : ""}`;
+      rc.appendChild(row2);
     } else {
       (exd.sets || []).forEach((st2, i) => {
         const row = div("review-set-row");
-        row.innerHTML = `<span class="review-set-label">Set ${i+1}</span><span class="review-set-val">${st2.weight ? st2.weight+" lbs" : "—"}</span><span class="review-set-val">${st2.reps ? st2.reps+" reps" : "—"}</span>`;
+        row.innerHTML = `<span class="review-set-label">Set ${i + 1}</span><span class="review-set-val">${st2.weight ? st2.weight + " lbs" : "—"}</span><span class="review-set-val">${st2.reps ? st2.reps + " reps" : "—"}</span>`;
         rc.appendChild(row);
       });
       if (exd.hitFailure !== null && exd.hitFailure !== undefined)
@@ -497,15 +774,18 @@ function renderReview() {
     d.appendChild(rc);
   });
 
-  // Save
   const sb = btn("save-btn", () => {
-    state.history.push({ id: Date.now(), date: state.sessionDate, sessionKey: state.sessionKey, sessionLabel: s.label, energy: state.energy, exercises: state.sessionData });
+    const record = { id: Date.now(), date: state.sessionDate, sessionKey: state.sessionKey, sessionLabel: s.label, energy: state.energy, exercises: state.sessionData };
+    state.history.push(record);
     saveHistory();
-    state.screen = "home"; state.sessionKey = null; state.sessionData = {}; state.energy = null;
+    state.screen = "home";
+    state.sessionKey = null; state.sessionData = {}; state.energy = null;
+    // Auto-export after save
+    setTimeout(() => exportToDownloads(), 300);
     render();
   });
   sb.style.background = s.accent;
-  sb.textContent = "Save Session ✓";
+  sb.textContent = "Save & Export Session ✓";
   d.appendChild(sb);
 
   const eb2 = btn("edit-btn", () => { state.step = s.exercises.length - 1; state.screen = "session"; render(); });
@@ -544,16 +824,20 @@ function renderHistoryDetail() {
     el(rc, "div", "review-ex-name", ex.name);
     if (ex.type === "plank") {
       const row = div("review-set-row");
-      row.innerHTML = `<span class="review-set-label">${exd.plankSets} sets</span><span class="review-set-val">${exd.plankDuration} sec each</span>${exd.completed ? '<span class="done-green">✓</span>' : ""}`;
+      row.innerHTML = `<span class="review-set-label">${exd.plankSets} sets</span><span class="review-set-val">${exd.plankDuration} sec</span>${exd.completed ? '<span class="done-green">✓</span>' : ""}`;
       rc.appendChild(row);
     } else if (ex.type === "carry") {
       const row = div("review-set-row");
-      row.innerHTML = `<span class="review-set-label">${exd.carryWeight} lbs / hand</span><span class="review-set-val">${exd.carryDistance} m</span>${exd.completed ? '<span class="done-green">✓</span>' : ""}`;
+      row.innerHTML = `<span class="review-set-label">${exd.carryWeight} lbs/hand</span><span class="review-set-val">${exd.carryDistance} m</span>${exd.completed ? '<span class="done-green">✓</span>' : ""}`;
+      rc.appendChild(row);
+    } else if (ex.type === "chinup") {
+      const row = div("review-set-row");
+      row.innerHTML = `<span class="review-set-label">Assist: ${exd.assistWeight} lbs</span><span class="review-set-val">${exd.chinReps} chin-ups</span><span class="review-set-val">${exd.negReps} neg</span>`;
       rc.appendChild(row);
     } else {
       (exd.sets || []).forEach((st2, i) => {
         const row = div("review-set-row");
-        row.innerHTML = `<span class="review-set-label">Set ${i+1}</span><span class="review-set-val">${st2.weight ? st2.weight+" lbs" : "—"}</span><span class="review-set-val">${st2.reps ? st2.reps+" reps" : "—"}</span>`;
+        row.innerHTML = `<span class="review-set-label">Set ${i + 1}</span><span class="review-set-val">${st2.weight ? st2.weight + " lbs" : "—"}</span><span class="review-set-val">${st2.reps ? st2.reps + " reps" : "—"}</span>`;
         rc.appendChild(row);
       });
       if (exd.hitFailure !== null && exd.hitFailure !== undefined)
@@ -566,27 +850,6 @@ function renderHistoryDetail() {
   return d;
 }
 
-// ─── HELPERS ───────────────────────────────────────────────────
-function div(cls) { const e = document.createElement("div"); if (cls) e.className = cls; return e; }
-function el(parent, tag, cls, text) { const e = document.createElement(tag); e.className = cls; if (text !== undefined) e.textContent = text; parent.appendChild(e); return e; }
-function btn(cls, onclick) { const b = document.createElement("button"); b.className = cls; b.onclick = onclick; return b; }
-function label(parent, text) { el(parent, "div", "section-label", text); }
-
-function stepper(labelText, value, min, max, step, unit, onChange) {
-  const w = div("stepper-wrap");
-  el(w, "div", "stepper-label", labelText);
-  const row = div("stepper-row");
-  const dm = btn("step-btn", () => { if (value > min) onChange(value - step); });
-  dm.textContent = "−";
-  const val = div("stepper-val");
-  val.innerHTML = value + `<span class="stepper-unit"> ${unit}</span>`;
-  const dp = btn("step-btn", () => { if (value < max) onChange(value + step); });
-  dp.textContent = "+";
-  row.appendChild(dm); row.appendChild(val); row.appendChild(dp);
-  w.appendChild(row);
-  return w;
-}
-
 function startSession(key) {
   state.sessionKey = key;
   state.step = 0;
@@ -594,11 +857,12 @@ function startSession(key) {
   state.energy = null;
   state.sessionDate = new Date().toISOString();
   state.screen = "session";
+  state.skippedExercises = [];
   render();
 }
 
 // ─── INIT ──────────────────────────────────────────────────────
-loadHistory();
+loadState();
 render();
 </script>
 </body>
