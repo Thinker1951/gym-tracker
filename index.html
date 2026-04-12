@@ -140,6 +140,7 @@
   .import-ok { background: #1B4332; color: #52B788; }
   .import-err { background: #3A1A1A; color: #FF6B6B; }
 
+
   /* MACHINE SETTINGS */
   .machine-card { background: #0F1A0F; border: 1px solid #1B4332; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
   .machine-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #52B788; margin-bottom: 8px; }
@@ -163,9 +164,9 @@
 <div id="app"></div>
 
 <script>
-const VERSION = "1.7 — April 2026";
+const VERSION = "1.7 - April 2026";
 
-// ─── SESSION DATA ──────────────────────────────────────────────
+// --- SESSION DATA ----------------------------------------------
 const SESSIONS = {
   A: {
     label: "SESSION A", subtitle: "Chest · Back · Biceps · Legs",
@@ -177,15 +178,15 @@ const SESSIONS = {
         settings: [{key:"seat", label:"Seat / Knee Pad"},{key:"grip", label:"Grip Width"}] },
       { id: "seated_row_a",  name: "Seated Row",             sets: 2, notes: "Ramp protocol",
         settings: [{key:"seat", label:"Seat Height"},{key:"chest", label:"Chest Pad"},{key:"handles", label:"Handle Position"}] },
-      { id: "chin_up_a",     name: "Assisted Chin-Up",       type: "chinup", notes: "4-part sequence — see below",
+      { id: "chin_up_a",     name: "Assisted Chin-Up",       type: "chinup", notes: "4-part sequence - see below",
         settings: [{key:"kneepad", label:"Knee Pad Height"},{key:"grip", label:"Grip Width"}] },
       { id: "ez_curl",       name: "Cable / EZ Bar Curl",    sets: 2, notes: "Ramp protocol",
         settings: [{key:"cable", label:"Cable Position"},{key:"bar", label:"Bar / Attachment"}] },
       { id: "leg_press_a",   name: "Leg Press",              sets: 2, notes: "Ramp protocol",
         settings: [{key:"seat", label:"Seat Position"},{key:"foot", label:"Foot Plate Position"}] },
-      { id: "leg_curl_a",    name: "Leg Curl (Hamstring)",   sets: 2, notes: "Ramp protocol — quad/hamstring balance",
+      { id: "leg_curl_a",    name: "Leg Curl (Hamstring)",   sets: 2, notes: "Ramp protocol - quad/hamstring balance",
         settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Ankle Pad"}] },
-      { id: "face_pull",     name: "Cable Face Pull",        sets: 2, notes: "Light weight, full range — rear delt & rotator cuff",
+      { id: "face_pull",     name: "Cable Face Pull",        sets: 2, notes: "Light weight, full range - rear delt & rotator cuff",
         settings: [{key:"cable", label:"Cable Height"},{key:"attach", label:"Attachment"}] },
       { id: "plank_a",       name: "Plank",  type: "plank", defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
       { id: "carry_a",       name: "Farmer Carry", type: "carry", defaultWeight: 30, defaultDistance: 120, notes: "Closing anchor" },
@@ -197,17 +198,17 @@ const SESSIONS = {
     exercises: [
       { id: "shoulder_press",  name: "Shoulder Press",               sets: 2, notes: "Ramp protocol",
         settings: [{key:"seat", label:"Seat Position"},{key:"handles", label:"Handle Height"}] },
-      { id: "lateral_raise",   name: "Lateral Raise Machine",        sets: 2, notes: "Light — shoulder stabilizer health",
+      { id: "lateral_raise",   name: "Lateral Raise Machine",        sets: 2, notes: "Light - shoulder stabilizer health",
         settings: [{key:"seat", label:"Seat Position"},{key:"chest", label:"Chest Pad"}] },
       { id: "tricep_pushdown", name: "Triceps Pushdown",             sets: 2, notes: "Ramp protocol",
         settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Arm Pad Height"}] },
       { id: "assisted_chin",   name: "Assisted Chin / Pulldown",     sets: 2, notes: "Ramp protocol",
         settings: [{key:"kneepad", label:"Knee Pad Height"}] },
-      { id: "hip_abduction",   name: "Hip Abduction",                sets: 2, notes: "Glute med — fall prevention",
+      { id: "hip_abduction",   name: "Hip Abduction",                sets: 2, notes: "Glute med - fall prevention",
         settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Pad Width"}] },
       { id: "hip_adduction",   name: "Hip Adduction",                sets: 2, notes: "Inner thigh balance",
         settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Pad Width"}] },
-      { id: "glute_press",     name: "Glute Press / Cable Kickback", sets: 2, notes: "Hip hinge pattern — largest muscle group",
+      { id: "glute_press",     name: "Glute Press / Cable Kickback", sets: 2, notes: "Hip hinge pattern - largest muscle group",
         settings: [{key:"height", label:"Cable / Platform Height"},{key:"attach", label:"Attachment"}] },
       { id: "calf_raise",      name: "Seated Calf Raise",            sets: 2, notes: "Balance, ankle stability, circulation",
         settings: [{key:"pad", label:"Knee Pad Position"},{key:"foot", label:"Foot Position"}] },
@@ -219,7 +220,7 @@ const SESSIONS = {
     label: "SESSION C", subtitle: "Full Body Power Day",
     color: "#4A1942", accent: "#C77DFF",
     exercises: [
-      { id: "leg_press_c",      name: "Leg Press",                     sets: 2, notes: "Go heavier — power day",
+      { id: "leg_press_c",      name: "Leg Press",                     sets: 2, notes: "Go heavier - power day",
         settings: [{key:"seat", label:"Seat Position"},{key:"foot", label:"Foot Plate Position"}] },
       { id: "chest_press_c",    name: "Chest Press",                   sets: 2, notes: "Ramp protocol",
         settings: [{key:"seat", label:"Seat Position"},{key:"back", label:"Back Pad"},{key:"handles", label:"Handle Height"}] },
@@ -227,14 +228,14 @@ const SESSIONS = {
         settings: [{key:"seat", label:"Seat Height"},{key:"chest", label:"Chest Pad"},{key:"handles", label:"Handle Position"}] },
       { id: "shoulder_press_c", name: "Shoulder Press",                sets: 2, notes: "Ramp protocol",
         settings: [{key:"seat", label:"Seat Position"},{key:"handles", label:"Handle Height"}] },
-      { id: "leg_curl_c",       name: "Leg Curl (Hamstring)",          sets: 2, notes: "Hamstring balance — do not skip",
+      { id: "leg_curl_c",       name: "Leg Curl (Hamstring)",          sets: 2, notes: "Hamstring balance - do not skip",
         settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Ankle Pad"}] },
       { id: "cable_curl_c",     name: "Cable / EZ Bar Curl",           sets: 2, notes: "Ramp protocol",
         settings: [{key:"cable", label:"Cable Position"},{key:"bar", label:"Bar / Attachment"}] },
-      { id: "rotary_torso",     name: "Rotary Torso / Cable Woodchop", sets: 2, notes: "Both sides — controlled tempo",
+      { id: "rotary_torso",     name: "Rotary Torso / Cable Woodchop", sets: 2, notes: "Both sides - controlled tempo",
         settings: [{key:"seat", label:"Seat Position"},{key:"pivot", label:"Pivot Height"}] },
       { id: "plank_c",          name: "Plank",  type: "plank", defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
-      { id: "carry_c",          name: "Farmer Carry", type: "carry", defaultWeight: 35, defaultDistance: 120, notes: "Power day — stepped up carry weight" },
+      { id: "carry_c",          name: "Farmer Carry", type: "carry", defaultWeight: 35, defaultDistance: 120, notes: "Power day - stepped up carry weight" },
     ]
   }
 };
@@ -249,7 +250,7 @@ const ENERGY = [
   { v: 5, label: "Best ever", e: "⚡" },
 ];
 
-// ─── STATE ─────────────────────────────────────────────────────
+// --- STATE -----------------------------------------------------
 let state = {
   screen: "home",
   sessionKey: null,
@@ -286,7 +287,7 @@ function saveMachineSettings(exerciseId, settings) {
   localStorage.setItem("victor_machine_" + exerciseId, JSON.stringify(settings));
 }
 
-// ─── NEXT SESSION LOGIC ────────────────────────────────────────
+// --- NEXT SESSION LOGIC ----------------------------------------
 function getNextSession() {
   if (state.history.length === 0) return "A";
   const last = state.history[state.history.length - 1].sessionKey;
@@ -294,11 +295,10 @@ function getNextSession() {
   return ROTATION[(idx + 1) % ROTATION.length];
 }
 
-// ─── EXPORT ────────────────────────────────────────────────────
+// --- EXPORT ----------------------------------------------------
 function buildExportData() {
   const next = getNextSession();
   const today = new Date().toISOString().slice(0, 10);
-  // Collect all saved machine settings
   const machineSettings = {};
   Object.values(SESSIONS).forEach(s => {
     s.exercises.forEach(ex => {
@@ -314,7 +314,7 @@ function buildExportData() {
     history: state.history,
     pendingChanges: state.pendingChanges,
     machineSettings,
-    _info: "Victor's Gym Tracker — upload this file to Claude chat to begin your session"
+    _info: "Victor's Gym Tracker - upload this file to Claude chat to begin your session"
   };
 }
 
@@ -337,11 +337,11 @@ function exportToDrive() {
   // Then open Google Drive in new tab
   setTimeout(() => {
     window.open("https://drive.google.com/drive/my-drive", "_blank");
-    alert(`File "${filename}" saved to Downloads.\n\nGoogle Drive is now open — tap the + button and upload the file from your Downloads folder.`);
+    alert(`File "${filename}" saved to Downloads.\n\nGoogle Drive is now open - tap the + button and upload the file from your Downloads folder.`);
   }, 500);
 }
 
-// ─── HELPERS ───────────────────────────────────────────────────
+// --- HELPERS ---------------------------------------------------
 function getSession() { return SESSIONS[state.sessionKey]; }
 function getExercise() { return getSession()?.exercises[state.step]; }
 
@@ -399,7 +399,7 @@ function stepper(labelText, value, min, max, step, unit, onChange) {
   return w;
 }
 
-// ─── RENDER ────────────────────────────────────────────────────
+// --- RENDER ----------------------------------------------------
 function render() {
   const app = document.getElementById("app");
   app.innerHTML = "";
@@ -409,7 +409,7 @@ function render() {
   if (state.screen === "history") app.appendChild(renderHistoryDetail());
 }
 
-// ── HOME ──────────────────────────────────────────────────────
+// -- HOME ------------------------------------------------------
 function renderHome() {
   const d = div();
 
@@ -436,14 +436,14 @@ function renderHome() {
     const last = state.history[state.history.length - 1];
     const en = ENERGY.find(e => e.v === last.energy);
     const b = div("last-badge");
-    b.innerHTML = `Last: <strong>${last.sessionLabel}</strong> — ${fmtDate(last.date)} ${en ? en.e : ""}`;
+    b.innerHTML = `Last: <strong>${last.sessionLabel}</strong> - ${fmtDate(last.date)} ${en ? en.e : ""}`;
     d.appendChild(b);
   }
 
   // Pending changes notice
   if (state.pendingChanges.length > 0) {
     const cp = div("changes-panel");
-    el(cp, "div", "changes-title", `⚠ ${state.pendingChanges.length} ROUTINE CHANGE${state.pendingChanges.length > 1 ? "S" : ""} PENDING — ACTION ON PC`);
+    el(cp, "div", "changes-title", `⚠ ${state.pendingChanges.length} ROUTINE CHANGE${state.pendingChanges.length > 1 ? "S" : ""} PENDING - ACTION ON PC`);
     state.pendingChanges.forEach(c => {
       el(cp, "div", "changes-item", `${c.date}: ${c.note}`);
     });
@@ -479,7 +479,7 @@ function renderHome() {
           <div class="history-badge" style="background:${s?.color}">${r.sessionKey}</div>
           <div><div class="history-label">${r.sessionLabel}</div><div class="history-sub">${fmtDate(r.date)}</div></div>
         </div>
-        <div class="history-energy">${en ? en.e : "—"}</div>`;
+        <div class="history-energy">${en ? en.e : "-"}</div>`;
       list.appendChild(row);
     });
     d.appendChild(list);
@@ -542,7 +542,7 @@ function renderHome() {
         render();
       } catch(e) {
         const msg = div("import-msg import-err");
-        msg.textContent = "❌ Invalid format — check and try again";
+        msg.textContent = "❌ Invalid format - check and try again";
         panel.appendChild(msg);
       }
     });
@@ -561,7 +561,7 @@ function renderHome() {
   return d;
 }
 
-// ── SESSION ───────────────────────────────────────────────────
+// -- SESSION ---------------------------------------------------
 function renderSession() {
   const s = getSession();
   const ex = getExercise();
@@ -602,7 +602,7 @@ function renderSession() {
       el(lc, "div", "last-row", `Negatives: ${last.negReps} reps`);
       el(lc, "div", "last-row", `Hold top: ${last.holdTopSec}s · Hold bottom: ${last.holdBotSec}s`);
     } else {
-      (last.sets || []).forEach((st2, i) => el(lc, "div", "last-row", `Set ${i+1}: ${st2.weight||"—"} lbs · ${st2.reps||"—"} reps`));
+      (last.sets || []).forEach((st2, i) => el(lc, "div", "last-row", `Set ${i+1}: ${st2.weight||"-"} lbs · ${st2.reps||"-"} reps`));
       if (last.hitFailure !== null && last.hitFailure !== undefined)
         el(lc, "div", "last-row", `Failure: ${last.hitFailure ? "Yes ✅" : "No ❌"}`);
     }
@@ -617,7 +617,7 @@ function renderSession() {
     sf.appendChild(stepper("Sets", exd.plankSets, 1, 5, 1, "sets", v => { exd.plankSets = v; render(); }));
     sf.appendChild(stepper("Duration", exd.plankDuration, 15, 180, 15, "sec", v => { exd.plankDuration = v; render(); }));
     sc.appendChild(sf);
-    el(sc, "div", "summary-line", `${exd.plankSets} × ${exd.plankDuration} sec = ${Math.round(exd.plankSets * exd.plankDuration / 60 * 10) / 10} min`);
+    el(sc, "div", "summary-line", `${exd.plankSets} x ${exd.plankDuration} sec = ${Math.round(exd.plankSets * exd.plankDuration / 60 * 10) / 10} min`);
     const cb = btn("complete-btn" + (exd.completed ? " done" : ""), () => { exd.completed = !exd.completed; render(); });
     if (exd.completed) cb.style.background = s.accent;
     cb.style.borderColor = exd.completed ? s.accent : "#333";
@@ -672,7 +672,7 @@ function renderSession() {
   if (!isPlank && !isCarry && !isChinup) {
     for (let si = 0; si < ex.sets; si++) {
       const sc = div("set-card");
-      const slabel = el(sc, "div", "set-label", `SET ${si + 1}${si === 1 ? " — ramp to failure" : " — moderate"}`);
+      const slabel = el(sc, "div", "set-label", `SET ${si + 1}${si === 1 ? " - ramp to failure" : " - moderate"}`);
       slabel.style.color = s.accent;
       const sr = div("set-row");
       const wg = div("input-group");
@@ -721,7 +721,7 @@ function renderSession() {
   // Machine settings card
   if (ex.settings && ex.settings.length > 0) {
     const mc = div("machine-card");
-    el(mc, "div", "machine-title", "⚙ MACHINE SETUP — MY SETTINGS");
+    el(mc, "div", "machine-title", "MACHINE SETUP - MY SETTINGS");
     const mf = div("machine-fields");
     ex.settings.forEach(setting => {
       const field = div("machine-field");
@@ -743,7 +743,7 @@ function renderSession() {
     const lastSettings = loadMachineSettings(ex.id);
     const hasSettings = Object.values(lastSettings).some(v => v && v.trim());
     if (!hasSettings) {
-      el(mc, "div", "machine-hint", "Enter your settings once — they'll be saved and shown every session.");
+      el(mc, "div", "machine-hint", "Enter your settings once - they will be saved and shown every session.");
     }
     d.appendChild(mc);
   }
@@ -752,7 +752,7 @@ function renderSession() {
   const skippedInSession = state.skippedExercises.filter(i => i !== state.step);
   if (skippedInSession.length > 0) {
     const ss = div("skipped-section");
-    el(ss, "div", "skipped-title", "⏭ SKIPPED — COME BACK TO");
+    el(ss, "div", "skipped-title", "⏭ SKIPPED - COME BACK TO");
     skippedInSession.forEach(idx => {
       const skEx = s.exercises[idx];
       const row = div("skipped-item");
@@ -802,18 +802,20 @@ function renderSession() {
 
   // End session early button
   const endBtn = btn("end-session-btn", () => { state.screen = "review"; render(); });
-  endBtn.textContent = "⏹ End Session Early — Go to Review";
+  endBtn.textContent = "End Session Early - Go to Review";
   d.appendChild(endBtn);
 
   return d;
-} ────────────────────────────────────────────────────
+}
+
+// -- REVIEW ----------------------------------------------------
 function renderReview() {
   const s = getSession();
   const d = div();
 
   const rh = div("review-header");
   rh.style.background = s.color;
-  rh.innerHTML = `<div class="review-letter" style="color:${s.accent}">${state.sessionKey}</div><div><div class="review-title">${s.label} — Complete</div><div class="review-date">${fmtDate(state.sessionDate)}</div></div>`;
+  rh.innerHTML = `<div class="review-letter" style="color:${s.accent}">${state.sessionKey}</div><div><div class="review-title">${s.label} - Complete</div><div class="review-date">${fmtDate(state.sessionDate)}</div></div>`;
   d.appendChild(rh);
 
   const es = div("energy-section");
@@ -852,7 +854,7 @@ function renderReview() {
     } else {
       (exd.sets || []).forEach((st2, i) => {
         const row = div("review-set-row");
-        row.innerHTML = `<span class="review-set-label">Set ${i + 1}</span><span class="review-set-val">${st2.weight ? st2.weight + " lbs" : "—"}</span><span class="review-set-val">${st2.reps ? st2.reps + " reps" : "—"}</span>`;
+        row.innerHTML = `<span class="review-set-label">Set ${i + 1}</span><span class="review-set-val">${st2.weight ? st2.weight + " lbs" : "-"}</span><span class="review-set-val">${st2.reps ? st2.reps + " reps" : "-"}</span>`;
         rc.appendChild(row);
       });
       if (exd.hitFailure !== null && exd.hitFailure !== undefined)
@@ -883,7 +885,7 @@ function renderReview() {
   return d;
 }
 
-// ── HISTORY DETAIL ────────────────────────────────────────────
+// -- HISTORY DETAIL --------------------------------------------
 function renderHistoryDetail() {
   const r = state.viewingRecord;
   const s = SESSIONS[r.sessionKey];
@@ -925,7 +927,7 @@ function renderHistoryDetail() {
     } else {
       (exd.sets || []).forEach((st2, i) => {
         const row = div("review-set-row");
-        row.innerHTML = `<span class="review-set-label">Set ${i + 1}</span><span class="review-set-val">${st2.weight ? st2.weight + " lbs" : "—"}</span><span class="review-set-val">${st2.reps ? st2.reps + " reps" : "—"}</span>`;
+        row.innerHTML = `<span class="review-set-label">Set ${i + 1}</span><span class="review-set-val">${st2.weight ? st2.weight + " lbs" : "-"}</span><span class="review-set-val">${st2.reps ? st2.reps + " reps" : "-"}</span>`;
         rc.appendChild(row);
       });
       if (exd.hitFailure !== null && exd.hitFailure !== undefined)
@@ -949,7 +951,7 @@ function startSession(key) {
   render();
 }
 
-// ─── INIT ──────────────────────────────────────────────────────
+// --- INIT ------------------------------------------------------
 loadState();
 render();
 </script>
