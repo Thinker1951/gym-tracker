@@ -140,6 +140,18 @@
   .import-ok { background: #1B4332; color: #52B788; }
   .import-err { background: #3A1A1A; color: #FF6B6B; }
 
+  /* MACHINE SETTINGS */
+  .machine-card { background: #0F1A0F; border: 1px solid #1B4332; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
+  .machine-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #52B788; margin-bottom: 8px; }
+  .machine-fields { display: flex; flex-wrap: wrap; gap: 8px; }
+  .machine-field { flex: 1; min-width: 120px; display: flex; flex-direction: column; gap: 4px; }
+  .machine-field-label { font-size: 10px; color: #666; font-weight: 600; letter-spacing: 1px; }
+  .machine-field-input { background: #1A1A1A; border: 1px solid #2A3A2A; border-radius: 6px; padding: 8px 10px; color: #CCC; font-size: 14px; font-family: Georgia, serif; width: 100%; }
+  .machine-hint { font-size: 11px; color: #555; font-style: italic; margin-top: 6px; }
+
+  /* END SESSION EARLY */
+  .end-session-btn { width: 100%; background: none; border: 1px solid #333; border-radius: 8px; padding: 10px; color: #555; font-size: 12px; font-weight: 600; cursor: pointer; font-family: Georgia, serif; letter-spacing: 1px; margin-top: 10px; }
+
   /* PENDING CHANGES */
   .changes-panel { background: #1A1200; border: 1px solid #3A2800; border-radius: 10px; padding: 12px 14px; margin-top: 12px; }
   .changes-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #FF9500; margin-bottom: 8px; }
@@ -151,7 +163,7 @@
 <div id="app"></div>
 
 <script>
-const VERSION = "1.5 — April 2026";
+const VERSION = "1.7 — April 2026";
 
 // ─── SESSION DATA ──────────────────────────────────────────────
 const SESSIONS = {
@@ -159,14 +171,22 @@ const SESSIONS = {
     label: "SESSION A", subtitle: "Chest · Back · Biceps · Legs",
     color: "#1B4332", accent: "#52B788",
     exercises: [
-      { id: "chest_press",   name: "Chest Press",            sets: 2, notes: "Set 1 moderate · Set 2 ramp to failure" },
-      { id: "lat_pulldown",  name: "Lat Pulldown",           sets: 2, notes: "Ramp protocol" },
-      { id: "seated_row_a",  name: "Seated Row",             sets: 2, notes: "Ramp protocol" },
-      { id: "chin_up_a",     name: "Assisted Chin-Up",       type: "chinup", notes: "4-part sequence — see below" },
-      { id: "ez_curl",       name: "Cable / EZ Bar Curl",    sets: 2, notes: "Ramp protocol" },
-      { id: "leg_press_a",   name: "Leg Press",              sets: 2, notes: "Ramp protocol" },
-      { id: "leg_curl_a",    name: "Leg Curl (Hamstring)",   sets: 2, notes: "Ramp protocol — quad/hamstring balance" },
-      { id: "face_pull",     name: "Cable Face Pull",        sets: 2, notes: "Light weight, full range — rear delt & rotator cuff" },
+      { id: "chest_press",   name: "Chest Press",            sets: 2, notes: "Set 1 moderate · Set 2 ramp to failure",
+        settings: [{key:"seat", label:"Seat Position"},{key:"back", label:"Back Pad"},{key:"handles", label:"Handle Height"}] },
+      { id: "lat_pulldown",  name: "Lat Pulldown",           sets: 2, notes: "Ramp protocol",
+        settings: [{key:"seat", label:"Seat / Knee Pad"},{key:"grip", label:"Grip Width"}] },
+      { id: "seated_row_a",  name: "Seated Row",             sets: 2, notes: "Ramp protocol",
+        settings: [{key:"seat", label:"Seat Height"},{key:"chest", label:"Chest Pad"},{key:"handles", label:"Handle Position"}] },
+      { id: "chin_up_a",     name: "Assisted Chin-Up",       type: "chinup", notes: "4-part sequence — see below",
+        settings: [{key:"kneepad", label:"Knee Pad Height"},{key:"grip", label:"Grip Width"}] },
+      { id: "ez_curl",       name: "Cable / EZ Bar Curl",    sets: 2, notes: "Ramp protocol",
+        settings: [{key:"cable", label:"Cable Position"},{key:"bar", label:"Bar / Attachment"}] },
+      { id: "leg_press_a",   name: "Leg Press",              sets: 2, notes: "Ramp protocol",
+        settings: [{key:"seat", label:"Seat Position"},{key:"foot", label:"Foot Plate Position"}] },
+      { id: "leg_curl_a",    name: "Leg Curl (Hamstring)",   sets: 2, notes: "Ramp protocol — quad/hamstring balance",
+        settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Ankle Pad"}] },
+      { id: "face_pull",     name: "Cable Face Pull",        sets: 2, notes: "Light weight, full range — rear delt & rotator cuff",
+        settings: [{key:"cable", label:"Cable Height"},{key:"attach", label:"Attachment"}] },
       { id: "plank_a",       name: "Plank",  type: "plank", defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
       { id: "carry_a",       name: "Farmer Carry", type: "carry", defaultWeight: 30, defaultDistance: 120, notes: "Closing anchor" },
     ]
@@ -175,14 +195,22 @@ const SESSIONS = {
     label: "SESSION B", subtitle: "Shoulders · Triceps · Lower Body",
     color: "#1C3461", accent: "#5B8DEF",
     exercises: [
-      { id: "shoulder_press",  name: "Shoulder Press",               sets: 2, notes: "Ramp protocol" },
-      { id: "lateral_raise",   name: "Lateral Raise Machine",        sets: 2, notes: "Light — shoulder stabilizer health" },
-      { id: "tricep_pushdown", name: "Triceps Pushdown",             sets: 2, notes: "Ramp protocol" },
-      { id: "assisted_chin",   name: "Assisted Chin / Pulldown",     sets: 2, notes: "Ramp protocol" },
-      { id: "hip_abduction",   name: "Hip Abduction",                sets: 2, notes: "Glute med — fall prevention" },
-      { id: "hip_adduction",   name: "Hip Adduction",                sets: 2, notes: "Inner thigh balance" },
-      { id: "glute_press",     name: "Glute Press / Cable Kickback", sets: 2, notes: "Hip hinge pattern — largest muscle group" },
-      { id: "calf_raise",      name: "Seated Calf Raise",            sets: 2, notes: "Balance, ankle stability, circulation" },
+      { id: "shoulder_press",  name: "Shoulder Press",               sets: 2, notes: "Ramp protocol",
+        settings: [{key:"seat", label:"Seat Position"},{key:"handles", label:"Handle Height"}] },
+      { id: "lateral_raise",   name: "Lateral Raise Machine",        sets: 2, notes: "Light — shoulder stabilizer health",
+        settings: [{key:"seat", label:"Seat Position"},{key:"chest", label:"Chest Pad"}] },
+      { id: "tricep_pushdown", name: "Triceps Pushdown",             sets: 2, notes: "Ramp protocol",
+        settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Arm Pad Height"}] },
+      { id: "assisted_chin",   name: "Assisted Chin / Pulldown",     sets: 2, notes: "Ramp protocol",
+        settings: [{key:"kneepad", label:"Knee Pad Height"}] },
+      { id: "hip_abduction",   name: "Hip Abduction",                sets: 2, notes: "Glute med — fall prevention",
+        settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Pad Width"}] },
+      { id: "hip_adduction",   name: "Hip Adduction",                sets: 2, notes: "Inner thigh balance",
+        settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Pad Width"}] },
+      { id: "glute_press",     name: "Glute Press / Cable Kickback", sets: 2, notes: "Hip hinge pattern — largest muscle group",
+        settings: [{key:"height", label:"Cable / Platform Height"},{key:"attach", label:"Attachment"}] },
+      { id: "calf_raise",      name: "Seated Calf Raise",            sets: 2, notes: "Balance, ankle stability, circulation",
+        settings: [{key:"pad", label:"Knee Pad Position"},{key:"foot", label:"Foot Position"}] },
       { id: "plank_b",         name: "Plank",  type: "plank", defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
       { id: "carry_b",         name: "Farmer Carry", type: "carry", defaultWeight: 30, defaultDistance: 120, notes: "Closing anchor" },
     ]
@@ -191,13 +219,20 @@ const SESSIONS = {
     label: "SESSION C", subtitle: "Full Body Power Day",
     color: "#4A1942", accent: "#C77DFF",
     exercises: [
-      { id: "leg_press_c",      name: "Leg Press",                     sets: 2, notes: "Go heavier — power day" },
-      { id: "chest_press_c",    name: "Chest Press",                   sets: 2, notes: "Ramp protocol" },
-      { id: "seated_row_c",     name: "Seated Row",                    sets: 2, notes: "Ramp protocol" },
-      { id: "shoulder_press_c", name: "Shoulder Press",                sets: 2, notes: "Ramp protocol" },
-      { id: "leg_curl_c",       name: "Leg Curl (Hamstring)",          sets: 2, notes: "Hamstring balance — do not skip" },
-      { id: "cable_curl_c",     name: "Cable / EZ Bar Curl",           sets: 2, notes: "Ramp protocol" },
-      { id: "rotary_torso",     name: "Rotary Torso / Cable Woodchop", sets: 2, notes: "Both sides — controlled tempo" },
+      { id: "leg_press_c",      name: "Leg Press",                     sets: 2, notes: "Go heavier — power day",
+        settings: [{key:"seat", label:"Seat Position"},{key:"foot", label:"Foot Plate Position"}] },
+      { id: "chest_press_c",    name: "Chest Press",                   sets: 2, notes: "Ramp protocol",
+        settings: [{key:"seat", label:"Seat Position"},{key:"back", label:"Back Pad"},{key:"handles", label:"Handle Height"}] },
+      { id: "seated_row_c",     name: "Seated Row",                    sets: 2, notes: "Ramp protocol",
+        settings: [{key:"seat", label:"Seat Height"},{key:"chest", label:"Chest Pad"},{key:"handles", label:"Handle Position"}] },
+      { id: "shoulder_press_c", name: "Shoulder Press",                sets: 2, notes: "Ramp protocol",
+        settings: [{key:"seat", label:"Seat Position"},{key:"handles", label:"Handle Height"}] },
+      { id: "leg_curl_c",       name: "Leg Curl (Hamstring)",          sets: 2, notes: "Hamstring balance — do not skip",
+        settings: [{key:"seat", label:"Seat Position"},{key:"pad", label:"Ankle Pad"}] },
+      { id: "cable_curl_c",     name: "Cable / EZ Bar Curl",           sets: 2, notes: "Ramp protocol",
+        settings: [{key:"cable", label:"Cable Position"},{key:"bar", label:"Bar / Attachment"}] },
+      { id: "rotary_torso",     name: "Rotary Torso / Cable Woodchop", sets: 2, notes: "Both sides — controlled tempo",
+        settings: [{key:"seat", label:"Seat Position"},{key:"pivot", label:"Pivot Height"}] },
       { id: "plank_c",          name: "Plank",  type: "plank", defaultSets: 2, defaultDuration: 60, notes: "Anti-movement core anchor" },
       { id: "carry_c",          name: "Farmer Carry", type: "carry", defaultWeight: 35, defaultDistance: 120, notes: "Power day — stepped up carry weight" },
     ]
@@ -243,6 +278,14 @@ function savePendingChanges() {
   localStorage.setItem("victor_gym_changes", JSON.stringify(state.pendingChanges));
 }
 
+function loadMachineSettings(exerciseId) {
+  try { return JSON.parse(localStorage.getItem("victor_machine_" + exerciseId) || "{}"); } catch { return {}; }
+}
+
+function saveMachineSettings(exerciseId, settings) {
+  localStorage.setItem("victor_machine_" + exerciseId, JSON.stringify(settings));
+}
+
 // ─── NEXT SESSION LOGIC ────────────────────────────────────────
 function getNextSession() {
   if (state.history.length === 0) return "A";
@@ -255,11 +298,22 @@ function getNextSession() {
 function buildExportData() {
   const next = getNextSession();
   const today = new Date().toISOString().slice(0, 10);
+  // Collect all saved machine settings
+  const machineSettings = {};
+  Object.values(SESSIONS).forEach(s => {
+    s.exercises.forEach(ex => {
+      if (ex.settings) {
+        const saved = loadMachineSettings(ex.id);
+        if (Object.values(saved).some(v => v && v.trim())) machineSettings[ex.id] = saved;
+      }
+    });
+  });
   return {
     exportDate: today,
     nextSession: next,
     history: state.history,
     pendingChanges: state.pendingChanges,
+    machineSettings,
     _info: "Victor's Gym Tracker — upload this file to Claude chat to begin your session"
   };
 }
@@ -267,7 +321,7 @@ function buildExportData() {
 function exportToDownloads() {
   const next = getNextSession();
   const today = new Date().toISOString().slice(0, 10);
-  const filename = `victor_gym_${today}_next${next}.json`;
+  const filename = `mygymcoach.json`;
   const data = JSON.stringify(buildExportData(), null, 2);
   const blob = new Blob([data], { type: "application/json" });
   const url = URL.createObjectURL(blob);
@@ -310,7 +364,8 @@ function getExData() {
         notes: "", completed: false
       };
     else
-      state.sessionData[ex.id] = { sets: [{weight:"",reps:""},{weight:"",reps:""}], notes: "", hitFailure: null };
+      state.sessionData[ex.id] = { sets: [{weight:"",reps:""},{weight:"",reps:""}], notes: "", hitFailure: null,
+        machineSettings: loadMachineSettings(ex.id) };
   }
   return state.sessionData[ex.id];
 }
@@ -663,6 +718,36 @@ function renderSession() {
   ng.appendChild(ta);
   d.appendChild(ng);
 
+  // Machine settings card
+  if (ex.settings && ex.settings.length > 0) {
+    const mc = div("machine-card");
+    el(mc, "div", "machine-title", "⚙ MACHINE SETUP — MY SETTINGS");
+    const mf = div("machine-fields");
+    ex.settings.forEach(setting => {
+      const field = div("machine-field");
+      el(field, "div", "machine-field-label", setting.label.toUpperCase());
+      const inp = document.createElement("input");
+      inp.type = "text";
+      inp.className = "machine-field-input";
+      inp.placeholder = "e.g. position 5";
+      inp.value = exd.machineSettings?.[setting.key] || "";
+      inp.addEventListener("input", e => {
+        if (!exd.machineSettings) exd.machineSettings = {};
+        exd.machineSettings[setting.key] = e.target.value;
+        saveMachineSettings(ex.id, exd.machineSettings);
+      });
+      field.appendChild(inp);
+      mf.appendChild(field);
+    });
+    mc.appendChild(mf);
+    const lastSettings = loadMachineSettings(ex.id);
+    const hasSettings = Object.values(lastSettings).some(v => v && v.trim());
+    if (!hasSettings) {
+      el(mc, "div", "machine-hint", "Enter your settings once — they'll be saved and shown every session.");
+    }
+    d.appendChild(mc);
+  }
+
   // Skipped reminder
   const skippedInSession = state.skippedExercises.filter(i => i !== state.step);
   if (skippedInSession.length > 0) {
@@ -715,10 +800,13 @@ function renderSession() {
   nav.appendChild(nb);
   d.appendChild(nav);
 
-  return d;
-}
+  // End session early button
+  const endBtn = btn("end-session-btn", () => { state.screen = "review"; render(); });
+  endBtn.textContent = "⏹ End Session Early — Go to Review";
+  d.appendChild(endBtn);
 
-// ── REVIEW ────────────────────────────────────────────────────
+  return d;
+} ────────────────────────────────────────────────────
 function renderReview() {
   const s = getSession();
   const d = div();
